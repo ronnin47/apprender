@@ -1,0 +1,62 @@
+
+
+
+import React, { useState } from 'react';
+
+export const BarraKen = ({ kenN, kenActualN, setKenActualN }) => {
+
+    const [animacionActiva, setAnimacionActiva] = useState(true);
+
+    const [consumir,setConsumir]=useState("")
+
+    const porcentajeKen = (kenActualN / kenN) * 100;
+
+    const handleInput = (event) => {
+        const newValue = parseInt(event.target.value, 10);
+        // Verificar si el nuevo valor es válido (no menor que 0 ni mayor que ken)
+        if (!isNaN(newValue) && newValue >= 0 && newValue <= kenN) {
+            setKenActualN(newValue);
+        }
+    };
+
+    const handleConsumir=(event)=>{
+      setConsumir(event.target.value)
+    }
+
+    const consumirKen=()=>{
+
+        setAnimacionActiva(true);
+        setTimeout(() => {
+          setAnimacionActiva(false);
+        }, 1000); 
+        
+        const newValue=kenActualN-consumir
+        if (!isNaN(newValue) && newValue >= 0) {
+            setKenActualN(newValue);
+        }
+       
+    }
+
+    return (
+        <div className="col1" style={{marginTop:"10px"}}>
+            <div className='col4'>
+            <div className={`animate__animated ${animacionActiva ? 'animate__flip' : ''}`}>
+            <p style={{ fontSize: "20px", color: "aliceblue",marginTop:"10px" }}>Ken: {kenActualN}/{kenN}</p>
+            </div>
+        
+            <button className='btn btn-success' onClick={consumirKen} style={{margin:"7px"}} >consumir ken</button>
+            <input type="number" value={consumir} onChange={handleConsumir}className='inputKen'/>
+
+            </div>
+           
+
+            <div className="barraExterna">
+                <div
+                    className="barraInternaKen"
+                    style={{ width: `${porcentajeKen > 100 ? 100 : porcentajeKen}%`}}
+                ></div>
+            </div>
+        </div>
+    );
+};
+

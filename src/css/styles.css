@@ -1,0 +1,416 @@
+html,body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-image: url('../assets/imgBody.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+
+
+
+
+
+
+
+
+.miniCartas{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    justify-items: center;
+    margin-top: 1em;
+    gap: 1em;
+}
+.miniCartas>div:hover{
+  transform: scale(1.1);
+}
+.prueba{
+    border:30px solid black
+}
+.fondoBody{
+background-color: rgb(0, 0, 0);    
+}
+.fichaCombate{
+    color: aliceblue;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.fichaCombate>input{
+    width: 50%;
+}
+.tiradas{
+    color: aliceblue;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.cajastiradas{
+    display: flex;
+    justify-content: center;    
+}
+.cajaTirada{
+    width: 80%;
+    height: 30px;
+    border: 3px solid aliceblue;
+    background-color: black;
+    color: greenyellow;
+    margin-top: 10px;
+   text-align: center;
+
+}
+.cajaTotal{
+    width: 30%;
+    height: 30px;
+    border: 3px solid aliceblue;
+    background-color: black;
+    color: greenyellow;
+    margin-top: 10px;
+    text-align: center;
+ 
+    border-radius: 15px;
+}
+.dados10{
+    margin-left: 10px;
+    width: 20%;
+    padding: 10px;
+    border: 3px solid yellow;
+    background-color: black;
+    color: greenyellow;
+    border-radius: 30px;
+    text-align: center;
+    font-size: 25px;
+}
+.selected-card {
+    box-shadow: 0 0 20px 5px rgba(0, 255, 0, 0.8); /* Efecto de sombra para indicar selección */
+}
+
+
+
+
+
+.dataGrid{
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-items: center;  
+}
+.dataGrid>input{
+    width: 60%;
+    text-align: center;
+    border: 3px solid black;
+    color:aliceblue;
+    background-color: rgba(0, 0, 0, 0.685);
+    border-radius: 15px;
+    margin: 0.5%;
+}
+.dataGrid>input::placeholder {
+    color: aliceblue;
+    opacity: 0.8;
+  }
+.dataGrid > input:hover{
+    border: 3px solid yellow;
+}
+
+
+
+
+
+
+
+.imagenPj{
+    border: 3px solid red;
+    max-width: 80%;
+    border-radius: 15px;   
+}
+.col2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: start;
+}
+.col4{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;  
+    justify-items: center;
+    align-items: start;
+   
+}
+.col1{
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+.col1>input[type="text"]{
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    border: 3px solid aliceblue;
+    color:aliceblue;
+    background-color: rgba(0, 0, 0, 0.685);
+    border-radius: 15px;
+    margin: 0.5%;
+    align-items: center;
+}
+
+.col1>input[type="number"]{
+    width: 80px;
+    height: 30px;
+    text-align: center;
+    border: 3px solid aliceblue;
+    color:aliceblue;
+    background-color: rgba(0, 0, 0, 0.685);
+    border-radius: 5px;
+    margin: 0.5%;
+    align-items: center;
+}
+.col1>input::placeholder {
+    color: aliceblue;
+    opacity: 0.8;
+}
+.col1>label {
+    margin-top: 10px;
+    color: aliceblue;
+   text-align: center;
+   opacity: 0.8;
+}
+.col1>input:hover{
+    border:3px solid yellow; 
+
+    color: greenyellow;
+}
+
+
+.bordeRed{
+    border: 3px solid red;
+    border-radius: 15px;
+    background-color: black;
+    margin-top: 10px;
+    
+}
+.gradComp{
+    border: 3px solid red;
+    border-radius: 15px;
+    
+    margin-top: 10px;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(48,121,9,1) 57%, rgba(0,212,255,1) 100%);
+}
+.inputVentajas{
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    border: 3px solid aliceblue;
+    color:aliceblue;
+    background-color: rgba(0, 0, 0, 0.685);
+    border-radius: 15px;
+    align-items: center;
+}
+.inputInventario{
+    width:100%;
+    height: 30px;
+    text-align: center;
+    border: 3px solid aliceblue;
+    color:aliceblue;
+    background-color: rgba(0, 0, 0, 0.685);
+    border-radius: 15px;
+    align-items: center;
+}
+.items{
+    display: grid;
+    grid-template-columns: 30% 10% 60%;
+}
+
+.inputDominio{
+    width:100%;
+    height: 30px;
+    text-align: center;
+    border: 3px solid aliceblue;
+    color:aliceblue;
+    background-color: rgba(0, 0, 0, 0.685);
+    border-radius: 15px;
+    align-items: center;
+}
+.dominios{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.gridTecnicas{
+ display: grid;
+ grid-template-columns: 45% 10% 10% 15% 20%;
+ margin-top: 20px;
+}
+.gridTecnicas :hover{
+    color:yellow;
+   
+}
+
+
+
+
+.barraInternaVida{
+    height: 100%;
+    background-image: linear-gradient(to right, #FF0000, #800000);
+    border-radius: 10px;
+    transition: width 0.3s ease; 
+    box-shadow: 0 0 10px 5px rgba(255, 255, 0, 0.5), 0 0 20px 10px rgba(255, 255, 0, 0.3), 0 0 30px 15px rgba(255, 255, 0, 0.2);
+    border-top: 1px solid black;
+}
+.barraInternaVidaNegativa{
+    height: 100%;
+    background-image: linear-gradient(to right, #800080, #4B0082);
+    border-radius: 10px;
+    transition: width 0.3s ease; 
+    box-shadow: 0 0 10px 5px rgba(255, 255, 0, 0.5), 0 0 20px 10px rgba(255, 255, 0, 0.3), 0 0 30px 15px rgba(255, 255, 0, 0.2);
+}
+.barraExterna{
+    width: 100%;
+    height: 20px;
+    background-color: yellow;
+    border: 2px solid aliceblue;
+    border-radius: 10px; 
+    margin-top: 5px; 
+}
+.barraExternaN::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px; 
+    background-color: black;
+    z-index: 1; 
+  }
+  .barraExternaN {
+    --divisiones: positivaN;
+    width: 100%;
+    height: 20px;
+    background-color: yellow;
+    border: 2px solid aliceblue;
+    border-radius: 10px; 
+    margin-top: 5px; 
+    position: relative;
+  }
+  .barraExternaN {
+    --divisiones: positivaN;
+    width: 100%;
+    height: 20px;
+    background-color: yellow;
+    border: 2px solid aliceblue;
+    border-radius: 10px; 
+    margin-top: 5px; 
+    position: relative;
+  }
+  .barraExternaN::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to right, yellow 1px, transparent 1px);
+    background-size: calc(100% / (var(--divisiones) )) 100%;
+  }
+.barraInterna{
+    height: 100%;
+    background-color: rgb(47, 196, 255); 
+    border-radius: 10px;background-image: linear-gradient(to right, #2fc4ff, #1c8cff);
+    transition: width 0.3s ease; 
+    box-shadow: 0 0 10px 5px rgba(255, 255, 0, 0.5), 0 0 20px 10px rgba(255, 255, 0, 0.3), 0 0 30px 15px rgba(255, 255, 0, 0.2);
+}
+.barraInternaKen{
+    height: 100%;
+    background-image: linear-gradient(to right, #00FF00, #008000);
+    border-radius: 10px;
+    transition: width 0.3s ease; 
+    box-shadow: 0 0 10px 5px rgba(255, 255, 0, 0.5), 0 0 20px 10px rgba(255, 255, 0, 0.3), 0 0 30px 15px rgba(255, 255, 0, 0.2);
+}
+.inputKen{
+    border: 2px solid red;
+    border-radius: 10px;
+    background-color: black;
+    width: 100px;
+    padding:5px;
+    align-items: center;
+    text-align: center;
+    color: greenyellow;
+    margin: 5px;
+    font-size: larger;
+}
+.colBarraVida{
+    display: grid;
+    grid-template-columns: 25% 35% 20% 20%;  
+    justify-items: center;
+    align-items: start;   
+}
+#fases>input:hover{
+    font-size: 25px;
+}
+
+.inputConsumision{
+    border: 2px solid yellow;
+    border-radius: 15px;
+    background-color: black;
+    width: 80px;
+    padding:5px;
+    align-items: center;
+    text-align: center;
+    color: greenyellow;
+    margin: 5px;
+    font-size: larger;
+}
+.historiaPj{
+    width: 100%;
+    background-color: black;
+    color: aliceblue;
+    padding: 30px;
+    min-height: 300px;
+    border-radius: 10px;
+}
+.muertoPJ{
+    border: 5px solid rgba(56, 8, 8, 0.603);
+    max-width: 80%;
+    border-radius: 15px;   
+    opacity: 0.2;
+}
+
+
+.miniCartas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    justify-items: center;
+    margin-top: 1em;
+    gap: 1em;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .miniCartas {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .miniCartas {
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); 
+    }
+  }
+
+  .consolaTiradas {
+    width: 100%;
+    min-height: 150px; /* Ajusta esta altura según tus necesidades */
+    resize: none; /* Evita que el usuario cambie el tamaño del textarea */
+    background-color: black;
+    color: yellow;
+    border-radius: 0.5em;
+    padding: 2em;
+    overflow-y: scroll;
+    scroll-padding-bottom: 9999px; /* Valor grande para asegurar que la barra esté siempre en la parte inferior */
+  }
+  .chatcito{
+    background-color: rgba(0, 0, 0, 0.651);
+    color: greenyellow;
+    width: 90%;
+    margin-bottom: 2em;
+    padding-left: 1em;
+  }
+  
