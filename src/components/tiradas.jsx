@@ -201,13 +201,13 @@ const enviar=()=>{
       <div>
       <textarea name="" id="" value={sock.join('\n')} className="consolaTiradas" readOnly></textarea>
       <input type="text" className="chatcito" value={mensajeChat} onChange={handleChangeM} />
-      <button className="btn btn-success" onClick={enviar}>enviar</button>
+      <button className="btn btn-primary" onClick={enviar}>enviar</button>
       </div>
         <div className="tiradas">
       
         <div>
           <h1>{nombre}</h1>
-        <button className="btn btn-danger" onClick={tirarDados}>tirar</button>
+        <button className="btn btn-primary" onClick={tirarDados}>tirar</button>
    
         <input type="number" placeholder="caracteristica principal" value={principal} onChange={handlePrincipal}/>
         <input type="number" placeholder="caracteristica secundaria" value={secundaria} onChange={handleSecundaria}/>
