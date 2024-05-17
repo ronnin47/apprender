@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { io } from 'socket.io-client';
 
 const socket = io(process.env.REACT_APP_BACKEND_URL);
-
+//REACT_APP_BACKEND_URL=https://tu-backend-en-render.onrender.com
 
 function generarNumerosAzarSinRangoMin(cantidad, rangoMax) {
   var numeros = [];
@@ -60,8 +60,45 @@ const[secundaria,setSecundaria]=useState("")
   setValTiradaD10Bono(d10Bono.join(", "))
   
   setSumaTirada(total)
+  let imprimirTirada
+  let imprimirBase
+  let imprimirBonoD10
+  let imprimirBonoD20
+  let imprimirBonoKen
 
-  const message = `Tirada de ${nombre}:   Base de esfuerzo:    ${tirada.join(", ")}           Bono D10:   ${d10.join(", ")}           Bono de D20:   ${d20.join(", ")}        D10 KEN :   ${d10Bono.join(", ")}                TOTAL: ${total}`;
+console.log("suma de la base ", principalValue+secundariaValue)
+const baset=principalValue+secundariaValue
+
+  if(baset>0){
+    imprimirBase=`Base:    ${baset}`
+  }else{
+    imprimirBase="";
+  }
+
+  if(tirada.length>0){
+    imprimirTirada=`D10 esfuerzo:    ${tirada.join(", ")}`
+  }else{
+    imprimirTirada="";
+  }
+
+  if(d10.length>0){
+    imprimirBonoD10=`Bono D10:    ${d10.join(", ")}`
+  }else{
+    imprimirBonoD10="";
+  }
+
+  if(d20.length>0){
+    imprimirBonoD20=`Bono D20:    ${d20.join(", ")}`
+  }else{
+    imprimirBonoD20="";
+  }
+
+  if(d10Bono.length>0){
+    imprimirBonoKen=`Bono D10 KEN:    ${d10Bono.join(", ")}`
+  }else{
+    imprimirBonoKen="";
+  }
+  const message = `Tirada de ${nombre}:       ${imprimirBase}     ${imprimirTirada}       ${imprimirBonoD10}        ${imprimirBonoD20}        ${imprimirBonoKen}                TOTAL: ${total}`;
   
   
   
