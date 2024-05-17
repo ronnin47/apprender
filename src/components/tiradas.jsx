@@ -203,7 +203,7 @@ const enviar=()=>{
       <input type="text" className="chatcito" value={mensajeChat} onChange={handleChangeM} />
       <button className="btn btn-primary" onClick={enviar}>enviar</button>
       </div>
-        <div className="tiradas">
+      <div className="tiradas">
       
         <div>
           <h1>{nombre}</h1>
