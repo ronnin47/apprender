@@ -48,7 +48,8 @@ background-color: rgb(0, 0, 0);
 }
 .cajastiradas{
     display: flex;
-    justify-content: center;    
+    justify-content: center; 
+    justify-items: center;   
 }
 .cajaTirada{
     width: 80%;
@@ -61,13 +62,16 @@ background-color: rgb(0, 0, 0);
 
 }
 .cajaTotal{
-    width: 30%;
-    height: 30px;
+    width: 8em;
+    height: 4em;
     border: 3px solid aliceblue;
     background-color: black;
     color: greenyellow;
     margin-top: 10px;
     text-align: center;
+    font-size: 2em;
+    padding: 0px;
+
  
     border-radius: 15px;
 }
@@ -397,7 +401,7 @@ background-color: rgb(0, 0, 0);
 
   .consolaTiradas {
     width: 100%;
-    min-height: 150px; /* Ajusta esta altura según tus necesidades */
+    min-height: 250px; 
     resize: none; /* Evita que el usuario cambie el tamaño del textarea */
     background-color: black;
     color: yellow;
@@ -406,6 +410,8 @@ background-color: rgb(0, 0, 0);
     overflow-y: scroll;
     scroll-padding-bottom: 9999px; /* Valor grande para asegurar que la barra esté siempre en la parte inferior */
   }
+
+ 
   .chatcito{
     background-color: rgba(0, 0, 0, 0.651);
     color: greenyellow;
@@ -414,3 +420,23 @@ background-color: rgb(0, 0, 0);
     padding-left: 1em;
   }
   
+
+  .green{
+    color: aliceblue;
+    white-space: pre-wrap;
+  }
+  .red{
+    color: greenyellow;
+    white-space: pre-wrap;
+  }
+
+  .contChat {
+    min-height: 200px;  /* Altura mínima del contenedor */
+    max-height: 200px;  /* Altura máxima del contenedor */
+    overflow-y: auto;   /* Habilita el scroll vertical si el contenido excede la altura máxima */
+    border: 1px solid #ccc;  /* Bordes opcionales */
+    padding: 10px;  /* Relleno opcional */
+    background-color: black;  /* Color de fondo opcional */
+    padding: 1em;
+    border-radius: 15px;
+  }

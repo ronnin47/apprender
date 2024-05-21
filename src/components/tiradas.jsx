@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 
 
 import { io } from 'socket.io-client';
@@ -30,6 +30,8 @@ const[principal,setPrincipal]=useState("")
 const[secundaria,setSecundaria]=useState("")
 
 
+const textareaRef = useRef(null);
+const messagesEndRef = useRef(null);
 
  const tirarDados=()=>{
   const principalValue = principal === "" ? 0 : parseInt(principal);
@@ -98,11 +100,15 @@ const baset=principalValue+secundariaValue
   }else{
     imprimirBonoKen="";
   }
-  const message = `Tirada de ${nombre}:       ${imprimirBase}     ${imprimirTirada}       ${imprimirBonoD10}        ${imprimirBonoD20}        ${imprimirBonoKen}                TOTAL: ${total}`;
+  const message = `           Tirada       ${imprimirBase}     ${imprimirTirada}       ${imprimirBonoD10}        ${imprimirBonoD20}        ${imprimirBonoKen}                TOTAL: ${total}`;
   
+  const msgEnviar={
+    nombre:nombre,
+    mensaje:message
+  }
+
   
-  
-  socket.emit('message', message);
+  socket.emit('message', msgEnviar);
   setMessage('')
 
 }
@@ -169,7 +175,13 @@ const handleSecundaria=(event)=>{
 useEffect(() => {
   // Escuchar mensajes del servidor y actualizar el estado
   socket.on('message', (newMessage) => {
-    setSock((prevMessages) => [...prevMessages, newMessage]);
+
+    
+   
+console.log("nombre: ",newMessage.nombre)
+console.log("mensaje: ",newMessage.mensaje)
+    const mensajeC=`${newMessage.nombre}: ${newMessage.mensaje}`
+    setSock((prevMessages) => [...prevMessages, mensajeC]);
   });
 
   // Limpiar el evento al desmontar el componente
@@ -188,7 +200,11 @@ const handleChangeM=(event)=>{
 }
 const enviar=()=>{
 
-  const msgEnviar=`${nombre}: ${mensajeChat}`
+  //const msgEnviar=`${nombre}: ${mensajeChat}`
+const msgEnviar={
+  nombre:nombre,
+  mensaje:mensajeChat
+}
   socket.emit('message', msgEnviar);
   setMessage('')
   setMensajeChat("")
@@ -196,60 +212,103 @@ const enviar=()=>{
 }
 
 
+
+
+useEffect(() => {
+  if (textareaRef.current) {
+    textareaRef.current.scrollTop = textareaRef.current.scrollHeight;
+  }
+}, [sock]);
+
+
+const handleKeyPress = (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault(); // Previene el comportamiento por defecto del Enter
+    enviar();
+  }
+};
+
+/* <textarea 
+      name="" 
+      id="" 
+      ref={textareaRef}
+      value={sock.join('\n')} className="consolaTiradas" readOnly></textarea>*/
+
+
+      useEffect(() => {
+        if (messagesEndRef.current) {
+          messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+      }, [sock]);
+
   return (
     <>
       <div>
-      <textarea name="" id="" value={sock.join('\n')} className="consolaTiradas" readOnly></textarea>
-      <input type="text" className="chatcito" value={mensajeChat} onChange={handleChangeM} />
-      <button className="btn btn-primary" onClick={enviar}>enviar</button>
+      <div className="contChat">
+          {/* Verificar contenido de sock */}
+          {console.log("Contenido de sock:", sock)}
+          {sock.map((msg, index) => {
+            // Dividir el mensaje si es necesario
+            const [msgNombre, ...msgMensajeArray] = msg.split(': ');
+            const msgMensaje = msgMensajeArray.join(': ');
+            return (
+              <div key={index} className={msgNombre === nombre ? 'red' : 'green'}>
+                <span>{msgNombre}: {msgMensaje}</span>
+              </div>
+            );
+          })}
+          <div ref={messagesEndRef} />
+        </div>
+     
+      <input type="text" className="chatcito" value={mensajeChat} onChange={handleChangeM} onKeyPress={handleKeyPress}/>
+      <button className="btn btn-primary" onClick={enviar} style={{marginLeft:"10px"}}>enviar</button>
       </div>
+      
+    
+
       <div className="tiradas">
       
-        <div>
-          <h1>{nombre}</h1>
-        <button className="btn btn-primary" onClick={tirarDados}>tirar</button>
-   
-        <input type="number" placeholder="caracteristica principal" value={principal} onChange={handlePrincipal}/>
-        <input type="number" placeholder="caracteristica secundaria" value={secundaria} onChange={handleSecundaria}/>
-        <div>
-        <button className="btn btn-success" onClick={addD10}>+d10</button>
-        <button className="btn btn-danger" onClick={restD10}>-d10</button>
-        <label htmlFor="" value={dadosD10} className="dados10">{dadosD10}</label>
+        <div className="container">
+            <h1>{nombre}</h1>
+            <button className="btn btn-primary" onClick={tirarDados} style={{marginTop:"1em",marginBottom:"1em", width:"8em", placeItems:"center"}}>tirar</button>
+            <div style={{display:"grid", gridTemplateColumns:"1fr", marginBottom:"1em"}}>
+            <input type="number" placeholder="caracteristica principal" value={principal} onChange={handlePrincipal} className="cajaTirada" style={{width:"50%"}}/>
+            <input type="number" placeholder="caracteristica secundaria" value={secundaria} onChange={handleSecundaria} className="cajaTirada" style={{width:"50%"}}/>
+            </div>
+           
+            <div>
+            <button className="btn btn-success" onClick={addD10}>+d10</button>
+            <button className="btn btn-danger" onClick={restD10}>-d10</button>
+            <label htmlFor="" value={dadosD10} className="dados10">{dadosD10}</label>
+            </div>
+            <div>
+            <button className="btn btn-success" onClick={addD20}>+d20</button>
+            <button className="btn btn-danger" onClick={restD20}>-d20</button>
+            <label htmlFor="" value={dadosD20} className="dados10">{dadosD20}</label>
+            </div>
+            <div>
+            <button className="btn btn-success" onClick={addD10Bono}>+d10</button>
+            <button className="btn btn-danger" onClick={restD10Bono}>-d10</button>
+            <label htmlFor="" value={dadosD10Bono} className="dados10">{dadosD10Bono}</label>
+            </div>       
         </div>
-        <div>
-        <button className="btn btn-success" onClick={addD20}>+d20</button>
-        <button className="btn btn-danger" onClick={restD20}>-d20</button>
-        <label htmlFor="" value={dadosD20} className="dados10">{dadosD20}</label>
-        </div>
-        <div>
-        <button className="btn btn-success" onClick={addD10Bono}>+d10</button>
-        <button className="btn btn-danger" onClick={restD10Bono}>-d10</button>
-        <label htmlFor="" value={dadosD10Bono} className="dados10">{dadosD10Bono}</label>
-        </div>
-        
-        
 
-
-       
-        </div>
         <div className="cajasTirdas">
-        <div>
-            <input type="text" id="dadosEsfuerzo" className="cajaTirada" value={valTirada} placeholder="dados de esfuerzo" readOnly />
-        </div>
-        <div>
-            <input type="text" id="dadosD10" className="cajaTirada" value={valTiradaD10} placeholder="dados d10"readOnly />
-        </div>
-        <div>
-            <input type="text" id="dadosD20" className="cajaTirada" value={valTiradaD20} placeholder="dados d20"readOnly />
-        </div>
-        <div>
-            <input type="text" id="dadosD10Bono" className="cajaTirada" value={valTiradaD10Bono} placeholder="dados d10 de bono"readOnly />
-        </div>
         <div>   
             <input type="text" id="totalTirada" className="cajaTotal" value={sumaTirada} placeholder="total de tirada" readOnly />
         </div>
-
-       
+        <div>
+            <input type="text" id="dadosEsfuerzo" className="cajaTirada" value={valTirada} placeholder="dados de esfuerzo base" readOnly />
+        </div>
+        <div>
+            <input type="text" id="dadosD10" className="cajaTirada" value={valTiradaD10} placeholder="dados d10 de Bono "readOnly />
+        </div>
+        <div>
+            <input type="text" id="dadosD20" className="cajaTirada" value={valTiradaD20} placeholder="dados d20 de Bono"readOnly />
+        </div>
+        <div>
+            <input type="text" id="dadosD10Bono" className="cajaTirada" value={valTiradaD10Bono} placeholder="dados d10 de KEN"readOnly />
+        </div>
        </div>
  
     </div>
