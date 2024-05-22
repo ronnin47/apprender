@@ -7,16 +7,6 @@ html,body{
     background-size: cover;
     background-repeat: no-repeat;
 }
-
-
-
-
-
-
-
-
-
-
 .miniCartas{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -59,7 +49,6 @@ background-color: rgb(0, 0, 0);
     color: greenyellow;
     margin-top: 10px;
    text-align: center;
-
 }
 .cajaTotal{
     width: 8em;
@@ -71,8 +60,6 @@ background-color: rgb(0, 0, 0);
     text-align: center;
     font-size: 2em;
     padding: 0px;
-
- 
     border-radius: 15px;
 }
 .dados10{
@@ -87,13 +74,8 @@ background-color: rgb(0, 0, 0);
     font-size: 25px;
 }
 .selected-card {
-    box-shadow: 0 0 20px 5px rgba(0, 255, 0, 0.8); /* Efecto de sombra para indicar selección */
+    box-shadow: 0 0 20px 5px rgba(0, 255, 0, 0.8);
 }
-
-
-
-
-
 .dataGrid{
     display: grid;
     grid-template-columns: 1fr;
@@ -116,13 +98,6 @@ background-color: rgb(0, 0, 0);
 .dataGrid > input:hover{
     border: 3px solid yellow;
 }
-
-
-
-
-
-
-
 .imagenPj{
     border: 3px solid red;
     max-width: 80%;
@@ -138,8 +113,7 @@ background-color: rgb(0, 0, 0);
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;  
     justify-items: center;
-    align-items: start;
-   
+    align-items: start;  
 }
 .col1{
     display: grid;
@@ -157,7 +131,6 @@ background-color: rgb(0, 0, 0);
     margin: 0.5%;
     align-items: center;
 }
-
 .col1>input[type="number"]{
     width: 80px;
     height: 30px;
@@ -181,22 +154,17 @@ background-color: rgb(0, 0, 0);
 }
 .col1>input:hover{
     border:3px solid yellow; 
-
     color: greenyellow;
 }
-
-
 .bordeRed{
     border: 3px solid red;
     border-radius: 15px;
     background-color: black;
-    margin-top: 10px;
-    
+    margin-top: 10px;   
 }
 .gradComp{
     border: 3px solid red;
-    border-radius: 15px;
-    
+    border-radius: 15px;   
     margin-top: 10px;
     background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(48,121,9,1) 57%, rgba(0,212,255,1) 100%);
@@ -225,7 +193,6 @@ background-color: rgb(0, 0, 0);
     display: grid;
     grid-template-columns: 30% 10% 60%;
 }
-
 .inputDominio{
     width:100%;
     height: 30px;
@@ -246,13 +213,8 @@ background-color: rgb(0, 0, 0);
  margin-top: 20px;
 }
 .gridTecnicas :hover{
-    color:yellow;
-   
+    color:yellow  
 }
-
-
-
-
 .barraInternaVida{
     height: 100%;
     background-image: linear-gradient(to right, #FF0000, #800000);
@@ -402,7 +364,7 @@ background-color: rgb(0, 0, 0);
   .consolaTiradas {
     width: 100%;
     min-height: 250px; 
-    resize: none; /* Evita que el usuario cambie el tamaño del textarea */
+    resize: none; 
     background-color: black;
     color: yellow;
     border-radius: 0.5em;
@@ -410,8 +372,6 @@ background-color: rgb(0, 0, 0);
     overflow-y: scroll;
     scroll-padding-bottom: 9999px; /* Valor grande para asegurar que la barra esté siempre en la parte inferior */
   }
-
- 
   .chatcito{
     background-color: rgba(0, 0, 0, 0.651);
     color: greenyellow;
@@ -419,8 +379,6 @@ background-color: rgb(0, 0, 0);
     margin-bottom: 2em;
     padding-left: 1em;
   }
-  
-
   .green{
     color: aliceblue;
     white-space: pre-wrap;
@@ -429,14 +387,13 @@ background-color: rgb(0, 0, 0);
     color: greenyellow;
     white-space: pre-wrap;
   }
-
   .contChat {
-    min-height: 200px;  /* Altura mínima del contenedor */
-    max-height: 200px;  /* Altura máxima del contenedor */
-    overflow-y: auto;   /* Habilita el scroll vertical si el contenido excede la altura máxima */
-    border: 1px solid #ccc;  /* Bordes opcionales */
-    padding: 10px;  /* Relleno opcional */
-    background-color: black;  /* Color de fondo opcional */
+    min-height: 200px;  
+    max-height: 200px; 
+    overflow-y: auto;  
+    border: 1px solid #ccc;  
+    padding: 10px;  
+    background-color: black; 
     padding: 1em;
     border-radius: 15px;
   }

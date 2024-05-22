@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react"
 
-
+import 'animate.css';
 import { io } from 'socket.io-client';
 
 const socket = io(process.env.REACT_APP_BACKEND_URL);
@@ -32,6 +32,9 @@ const[secundaria,setSecundaria]=useState("")
 
 const textareaRef = useRef(null);
 const messagesEndRef = useRef(null);
+const [animacionActiva, setAnimacionActiva] = useState(false);
+
+
 
  const tirarDados=()=>{
   const principalValue = principal === "" ? 0 : parseInt(principal);
@@ -106,12 +109,18 @@ const baset=principalValue+secundariaValue
     nombre:nombre,
     mensaje:message
   }
-
+ 
+  setAnimacionActiva(true);
+  setTimeout(() => {
+  setAnimacionActiva(false); // Desactivar la animación después de un tiempo
+}, 1000); // Duración de la animación en milisegundos
   
   socket.emit('message', msgEnviar);
   setMessage('')
 
 }
+
+
 
 
 const[dadosD10,setDadosD10]=useState(0)
@@ -241,6 +250,8 @@ const handleKeyPress = (event) => {
         }
       }, [sock]);
 
+     
+
   return (
     <>
       <div>
@@ -292,9 +303,9 @@ const handleKeyPress = (event) => {
             <label htmlFor="" value={dadosD10Bono} className="dados10">{dadosD10Bono}</label>
             </div>       
         </div>
-
+      
         <div className="cajasTirdas">
-        <div>   
+        <div className={`animate__animated ${animacionActiva ? 'animate__bounce' : ''}`}>   
             <input type="text" id="totalTirada" className="cajaTotal" value={sumaTirada} placeholder="total de tirada" readOnly />
         </div>
         <div>
@@ -306,7 +317,8 @@ const handleKeyPress = (event) => {
         <div>
             <input type="text" id="dadosD20" className="cajaTirada" value={valTiradaD20} placeholder="dados d20 de Bono"readOnly />
         </div>
-        <div>
+      
+        <div >
             <input type="text" id="dadosD10Bono" className="cajaTirada" value={valTiradaD10Bono} placeholder="dados d10 de KEN"readOnly />
         </div>
        </div>
@@ -316,3 +328,11 @@ const handleKeyPress = (event) => {
     
   )
 }
+
+
+/*
+
+ 
+
+     
+*/
