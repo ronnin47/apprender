@@ -305,7 +305,7 @@ const handleKeyPress = (event) => {
         </div>
       
         <div className="cajasTirdas">
-        <div className={`animate__animated ${animacionActiva ? 'animate__bounce' : ''}`}>   
+        <div className={`animate__animated ${animacionActiva ? 'animate__bounce' : ''}`} style={{marginLeft:"9em"}}>   
             <input type="text" id="totalTirada" className="cajaTotal" value={sumaTirada} placeholder="total de tirada" readOnly />
         </div>
         <div>

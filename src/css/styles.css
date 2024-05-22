@@ -48,7 +48,8 @@ background-color: rgb(0, 0, 0);
     background-color: black;
     color: greenyellow;
     margin-top: 10px;
-   text-align: center;
+    text-align: center;
+    border-radius: 10px;
 }
 .cajaTotal{
     width: 8em;
