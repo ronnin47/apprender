@@ -24,11 +24,8 @@ const [sumaTirada,setSumaTirada]=useState("")
 const [valTiradaD10,setValTiradaD10]=useState("")
 const [valTiradaD20,setValTiradaD20]=useState("")
 const [valTiradaD10Bono,setValTiradaD10Bono]=useState("")
-
-
 const[principal,setPrincipal]=useState("")
 const[secundaria,setSecundaria]=useState("")
-
 
 const textareaRef = useRef(null);
 const messagesEndRef = useRef(null);
@@ -57,8 +54,6 @@ const [animacionActiva, setAnimacionActiva] = useState(false);
 
   let total=sumaTirada+parseInt(principalValue)+parseInt(secundariaValue)+sumaD10+sumaD20+sumaD10Bono
   
- 
-
   setValTirada(tirada.join(", "))
   setValTiradaD10(d10.join(", "))
   setValTiradaD20(d20.join(", "))
@@ -112,16 +107,13 @@ const baset=principalValue+secundariaValue
  
   setAnimacionActiva(true);
   setTimeout(() => {
-  setAnimacionActiva(false); // Desactivar la animación después de un tiempo
-}, 1000); // Duración de la animación en milisegundos
+  setAnimacionActiva(false); 
+}, 1000); 
   
   socket.emit('message', msgEnviar);
   setMessage('')
 
 }
-
-
-
 
 const[dadosD10,setDadosD10]=useState(0)
 const[dadosD20,setDadosD20]=useState(0)
@@ -183,22 +175,14 @@ const handleSecundaria=(event)=>{
 
 useEffect(() => {
   // Escuchar mensajes del servidor y actualizar el estado
-  socket.on('message', (newMessage) => {
-
-    
-   
-console.log("nombre: ",newMessage.nombre)
-console.log("mensaje: ",newMessage.mensaje)
+socket.on('message', (newMessage) => {
     const mensajeC=`${newMessage.nombre}: ${newMessage.mensaje}`
     setSock((prevMessages) => [...prevMessages, mensajeC]);
   });
-
-  // Limpiar el evento al desmontar el componente
   return () => {
     socket.off('message');
   };
 }, []);
-
 
 
 const [mensajeChat,setMensajeChat]=useState("")
@@ -217,7 +201,6 @@ const msgEnviar={
   socket.emit('message', msgEnviar);
   setMessage('')
   setMensajeChat("")
-
 }
 
 
