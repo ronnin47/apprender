@@ -21,9 +21,17 @@ export const Tiradas = ({nombre, message,setMessage,sock,setSock}) => {
  
 const [valTirada,setValTirada]=useState("")
 const [sumaTirada,setSumaTirada]=useState("")
+
+
+
+//acaaa
+const[valTiradaD6,setValTiradaD6]=useState("")
+const[valTiradaD4,setValTiradaD4]=useState("")
+
 const [valTiradaD10,setValTiradaD10]=useState("")
 const [valTiradaD20,setValTiradaD20]=useState("")
 const [valTiradaD10Bono,setValTiradaD10Bono]=useState("")
+
 const[principal,setPrincipal]=useState("")
 const[secundaria,setSecundaria]=useState("")
 
@@ -43,18 +51,35 @@ const [animacionActiva, setAnimacionActiva] = useState(false);
   let cantD10= Math.floor(principal / 10)+base;
   console.log("base: ",base)
   let tirada=generarNumerosAzarSinRangoMin(cantD10,10);
+
+  //acaaaaaaaa 2
+  let d6=generarNumerosAzarSinRangoMin(dadosD6Bono,6);
+  let d4=generarNumerosAzarSinRangoMin(dadosD4Bono,4);
+  
   let d10=generarNumerosAzarSinRangoMin(dadosD10,10);
   let d20=generarNumerosAzarSinRangoMin(dadosD20,20);
   let d10Bono=generarNumerosAzarSinRangoMin(dadosD10Bono,10);
 
   let sumaTirada = tirada.reduce((acumulador, valorActual) => acumulador + valorActual, 0);
+  
+  //acaaa 3
+  let sumaD6= d6.reduce((acumulador, valorActual)=> acumulador +valorActual,0);
+  let sumaD4= d4.reduce((acumulador, valorActual)=> acumulador +valorActual,0);
+
   let sumaD10= d10.reduce((acumulador, valorActual) => acumulador + valorActual, 0);
   let sumaD20= d20.reduce((acumulador, valorActual) => acumulador + valorActual, 0)
   let sumaD10Bono= d10Bono.reduce((acumulador, valorActual) => acumulador + valorActual, 0);
 
-  let total=sumaTirada+parseInt(principalValue)+parseInt(secundariaValue)+sumaD10+sumaD20+sumaD10Bono
+  // acaaa 4
+  let total=sumaTirada+parseInt(principalValue)+parseInt(secundariaValue)+sumaD10+sumaD20+sumaD10Bono+sumaD6+sumaD4
   
   setValTirada(tirada.join(", "))
+  
+  //acaaa 5
+  setValTiradaD6(d6.join(", "))
+  setValTiradaD4(d4.join(", "))
+
+  setValTiradaD10(d10.join(", "))
   setValTiradaD10(d10.join(", "))
   setValTiradaD20(d20.join(", "))
   setValTiradaD10Bono(d10Bono.join(", "))
@@ -62,6 +87,11 @@ const [animacionActiva, setAnimacionActiva] = useState(false);
   setSumaTirada(total)
   let imprimirTirada
   let imprimirBase
+  
+  //acaaa 6
+  let imprimirBonoD6
+  let imprimirBonoD4
+
   let imprimirBonoD10
   let imprimirBonoD20
   let imprimirBonoKen
@@ -81,6 +111,23 @@ const baset=principalValue+secundariaValue
     imprimirTirada="";
   }
 
+  //acaaaa 7
+ 
+  if(d6.length>0){
+    imprimirBonoD6=`Bono D6:    ${d6.join(", ")}`
+  }else{
+    imprimirBonoD6="";
+  }
+
+  if(d4.length>0){
+    imprimirBonoD4=`Bono D4:    ${d4.join(", ")}`
+  }else{
+    imprimirBonoD4="";
+  }
+
+
+
+
   if(d10.length>0){
     imprimirBonoD10=`Bono D10:    ${d10.join(", ")}`
   }else{
@@ -98,7 +145,9 @@ const baset=principalValue+secundariaValue
   }else{
     imprimirBonoKen="";
   }
-  const message = `           Tirada       ${imprimirBase}     ${imprimirTirada}       ${imprimirBonoD10}        ${imprimirBonoD20}        ${imprimirBonoKen}                TOTAL: ${total}`;
+  
+  //acaaa 8
+  const message = `           Tirada       ${imprimirBase}     ${imprimirTirada}       ${imprimirBonoD10}        ${imprimirBonoD20}        ${imprimirBonoKen}         ${imprimirBonoD6}        ${imprimirBonoD4}       TOTAL: ${total}`;
   
   const msgEnviar={
     nombre:nombre,
@@ -115,6 +164,11 @@ const baset=principalValue+secundariaValue
 
 }
 
+//acaaaa 9
+const[dadosD6Bono,setDadosD6Bono]=useState(0);
+const[dadosD4Bono,setDadosD4Bono]=useState(0)
+
+
 const[dadosD10,setDadosD10]=useState(0)
 const[dadosD20,setDadosD20]=useState(0)
 const[dadosD10Bono,setDadosD10Bono]=useState(0)
@@ -128,6 +182,8 @@ const addD10=()=>{
 const restD10=()=>{
   setDadosD10(dadosD10-1)
 }
+
+
 
 useEffect(() => {
  console.log(dadosD10)
@@ -146,6 +202,8 @@ useEffect(() => {
 }, [dadosD20]);
 
 
+
+
 const addD10Bono=()=>{
   setDadosD10Bono(dadosD10Bono+1)
 }
@@ -157,6 +215,23 @@ const restD10Bono=()=>{
 useEffect(() => {
  console.log(dadosD10)
 }, [dadosD10]);
+
+
+
+//acaaa 10
+const addD6Bono=()=>{
+  setDadosD6Bono(dadosD6Bono+1)
+}
+const restD6Bono=()=>{
+  setDadosD6Bono(dadosD6Bono-1)
+}
+
+const addD4Bono=()=>{
+  setDadosD4Bono(dadosD4Bono+1)
+}
+const restD4Bono=()=>{
+  setDadosD4Bono(dadosD4Bono-1)
+}
 
 
 const handlePrincipal=(event)=>{
@@ -284,6 +359,18 @@ const handleKeyPress = (event) => {
             <button className="btn btn-success" onClick={addD10Bono}>+d10</button>
             <button className="btn btn-danger" onClick={restD10Bono}>-d10</button>
             <label htmlFor="" value={dadosD10Bono} className="dados10">{dadosD10Bono}</label>
+            </div>    
+
+            <div>
+            <button className="btn btn-success" onClick={addD6Bono}> +d06</button>
+            <button className="btn btn-danger" onClick={restD6Bono}> -d06</button>
+            <label htmlFor="" value={dadosD6Bono} className="dados10">{dadosD6Bono}</label>
+            </div>    
+
+            <div>
+            <button className="btn btn-success" onClick={addD4Bono}> +d04</button>
+            <button className="btn btn-danger" onClick={restD4Bono}> -d04</button>
+            <label htmlFor="" value={dadosD4Bono} className="dados10">{dadosD4Bono}</label>
             </div>       
         </div>
       
@@ -299,10 +386,18 @@ const handleKeyPress = (event) => {
         </div>
         <div>
             <input type="text" id="dadosD20" className="cajaTirada" value={valTiradaD20} placeholder="dados d20 de Bono"readOnly />
-        </div>
-      
+        </div>      
         <div >
             <input type="text" id="dadosD10Bono" className="cajaTirada" value={valTiradaD10Bono} placeholder="dados d10 de KEN"readOnly />
+        </div>
+
+        <div>
+            <input type="text" id="dadosD6Bono" className="cajaTirada" value={valTiradaD6} placeholder="dados d6 de Bono"readOnly />
+        </div>
+
+
+        <div>
+            <input type="text" id="dadosD4Bono" className="cajaTirada" value={valTiradaD4} placeholder="dados d4 de Bono"readOnly />
         </div>
        </div>
  
@@ -313,9 +408,3 @@ const handleKeyPress = (event) => {
 }
 
 
-/*
-
- 
-
-     
-*/
