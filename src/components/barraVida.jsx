@@ -4,12 +4,14 @@ import { useEffect } from "react";
 
 import React, { useState } from "react";
 
+import { io } from 'socket.io-client';
+const socket = io(process.env.REACT_APP_BACKEND_URL);
 
 import 'animate.css';
 
 
 
-export const BarraVida = ({fortalezaN, kiN, positivaN,setPositivaN, negativaN,setNegativaN, damageActualN, setDamageActualN }) => {
+export const BarraVida = ({nombreN,fortalezaN, kiN, positivaN,setPositivaN, negativaN,setNegativaN, damageActualN, setDamageActualN }) => {
   const faseSalud = parseInt(kiN) + parseInt(fortalezaN);
   const vidaTotalPositiva = faseSalud * parseInt(positivaN);
   const vidaTotalNegativa = faseSalud * parseInt(negativaN);
@@ -36,6 +38,7 @@ export const BarraVida = ({fortalezaN, kiN, positivaN,setPositivaN, negativaN,se
 
   const agregarDamage = async () => {
     let newValue = parseInt(consumirVida)|| 0;;
+    //daño acumulado
     let newDamage = damageActualN + newValue;
   
     setAnimacionActiva(true);
@@ -65,6 +68,74 @@ export const BarraVida = ({fortalezaN, kiN, positivaN,setPositivaN, negativaN,se
       setPorcentajeVidaNegativa(porcentajeNegativaAjustado); // Establecer el porcentaje de la barra negativa
     }
     
+    let estadoDeFase=""
+
+    if(newDamage<=vidaTotalPositiva && newDamage>=(vidaTotalPositiva-faseSalud)){
+      estadoDeFase="fase MALHERIDO"
+   }
+   
+   if(newDamage<=(vidaTotalPositiva-faseSalud) && newDamage>=(vidaTotalPositiva-faseSalud*2)){
+    estadoDeFase="fase MALTRECHO"
+  }
+  if(newDamage<=(vidaTotalPositiva-faseSalud*2) && newDamage>=(vidaTotalPositiva-faseSalud*3)){
+    if(newDamage!==0){
+     estadoDeFase="fase RAZGADO"
+    }
+  }
+
+   if(newDamage>vidaTotalPositiva && newDamage<=(vidaTotalPositiva+faseSalud)){
+      estadoDeFase="fase INCONCIENTE"
+   }
+   if(newDamage>(vidaTotalPositiva+faseSalud) && newDamage<=(vidaTotalPositiva+faseSalud*2)){
+    estadoDeFase="fase iNCAPACITADO"
+   }
+   if(newDamage>(vidaTotalPositiva+faseSalud*2) && newDamage<=(vidaTotalPositiva+faseSalud*3)){
+    estadoDeFase="fase MORIBUNDO"
+   }
+  
+
+
+
+
+    let aturdimiento="";
+    //catidad de fase positivas, cantidad de fases negativas
+    if(newValue>=faseSalud){
+      aturdimiento="****ATURDIDO*****"
+    }
+
+    let estadoSalud
+    if(newDamage>vidaTotalPositiva){
+      if(newDamage<=vidaTotal){
+          estadoSalud=`barra negativa ${aturdimiento}`
+      }else if(newDamage>vidaTotal){
+        estadoSalud=`********************* ${nombreN} MUERTO ********************* ${aturdimiento}`
+      }
+      
+    }else if(newDamage<=vidaTotalPositiva){
+      estadoSalud=`barra positiva ${aturdimiento}`
+    }
+
+
+    let message
+
+    if(newValue>0){
+        message = `            Recibio ${newValue} p de DAÑO                        VITALIDAD: ${newDamage} / ${vidaTotal}                             ${estadoDeFase}   ${estadoSalud}`;
+    }else if(newValue<0){
+        let recuperado=-(newValue)
+        message = `            Restauro ${recuperado} p de VIDA                     VITALIDAD: ${newDamage} / ${vidaTotal}                             ${estadoDeFase}   ${estadoSalud}`;
+    }else {
+        message = `                             VITALIDAD: ${newDamage} / ${vidaTotal}          ${estadoDeFase}   ${estadoSalud}`;
+    }
+  
+   
+    const nombre=nombreN
+
+    const msgEnviar={
+    nombre:nombre,
+    mensaje:message
+    }
+    
+    socket.emit('message', msgEnviar);
    
    
   };

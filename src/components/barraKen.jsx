@@ -3,7 +3,10 @@
 
 import React, { useState } from 'react';
 
-export const BarraKen = ({ kenN, kenActualN, setKenActualN }) => {
+import { io } from 'socket.io-client';
+const socket = io(process.env.REACT_APP_BACKEND_URL);
+
+export const BarraKen = ({ nombreN, kenN, kenActualN, setKenActualN }) => {
 
     const [animacionActiva, setAnimacionActiva] = useState(true);
 
@@ -33,6 +36,27 @@ export const BarraKen = ({ kenN, kenActualN, setKenActualN }) => {
         const newValue=kenActualN-consumir
         if (!isNaN(newValue) && newValue >= 0) {
             setKenActualN(newValue);
+
+            let message
+
+            if(consumir>0){
+                message = `             Consumio ${consumir} p de KEN                     KEN: ${newValue} / ${kenN}`;
+            }else if(consumir<0){
+                let recuperado=-(consumir)
+                message = `             Recupero ${recuperado} p de KEN                     KEN: ${newValue} / ${kenN}`;
+            }else {
+                message = `                             KEN: ${newValue} / ${kenN}`;
+            }
+          // ESTAMOS ACA EMITIENDO EL MENSAJE DE PRUEBA
+           
+            const nombre=nombreN
+      
+            const msgEnviar={
+            nombre:nombre,
+            mensaje:message
+            }
+            
+            socket.emit('message', msgEnviar);
         }
        
     }

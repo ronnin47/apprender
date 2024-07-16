@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 
-export const BarraKi = ({ consumisionN, setConsumisionN, kiN, kiActualN, setKiActualN }) => {
+import { io } from 'socket.io-client';
+const socket = io(process.env.REACT_APP_BACKEND_URL);
+
+
+export const BarraKi = ({nombreN, consumisionN, setConsumisionN, kiN, kiActualN, setKiActualN }) => {
     
 
     const [animacionActiva, setAnimacionActiva] = useState(true);
@@ -30,11 +34,45 @@ export const BarraKi = ({ consumisionN, setConsumisionN, kiN, kiActualN, setKiAc
         }, 1000); 
         
         const newValue=kiActualN-consumir
+
         if (!isNaN(newValue) && newValue >= 0) {
             setKiActualN(newValue);
+
+            let message
+
+            if(consumir>0){
+                message = `            Consumio ${consumir} p de KI                     KI: ${newValue} / ${kiN}`;
+            }else if(consumir<0){
+                let recuperado=-(consumir)
+                message = `            Recupero ${recuperado} p de KI                     KI: ${newValue} / ${kiN}`;
+            }else {
+                message = `                             KI: ${newValue} / ${kiN}`;
+            }
+          // ESTAMOS ACA EMITIENDO EL MENSAJE DE PRUEBA
+           
+            const nombre=nombreN
+      
+            const msgEnviar={
+            nombre:nombre,
+            mensaje:message
+            }
+            
+            socket.emit('message', msgEnviar);
+            
         }
+
        
+
+
+
+
+
+
+
     }
+
+
+
 
     const handleConsumision=(event)=>{
           setConsumisionN(event.target.value)
