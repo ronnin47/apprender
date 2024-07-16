@@ -40,10 +40,10 @@ export const BarraKen = ({ nombreN, kenN, kenActualN, setKenActualN }) => {
             let message
 
             if(consumir>0){
-                message = `             Consumio ${consumir} p de KEN                     KEN: ${newValue} / ${kenN}`;
+                message = `            Consumio ${consumir} p de KEN                     KEN: ${newValue} / ${kenN}`;
             }else if(consumir<0){
                 let recuperado=-(consumir)
-                message = `             Recupero ${recuperado} p de KEN                     KEN: ${newValue} / ${kenN}`;
+                message = `            Recupero ${recuperado} p de KEN                     KEN: ${newValue} / ${kenN}`;
             }else {
                 message = `                             KEN: ${newValue} / ${kenN}`;
             }

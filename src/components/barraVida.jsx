@@ -71,11 +71,15 @@ export const BarraVida = ({nombreN,fortalezaN, kiN, positivaN,setPositivaN, nega
     let estadoDeFase=""
 
     if(newDamage<=vidaTotalPositiva && newDamage>=(vidaTotalPositiva-faseSalud)){
+      if(newDamage!==0){
       estadoDeFase="fase MALHERIDO"
+      }
    }
    
    if(newDamage<=(vidaTotalPositiva-faseSalud) && newDamage>=(vidaTotalPositiva-faseSalud*2)){
+    if(newDamage!==0){
     estadoDeFase="fase MALTRECHO"
+    }
   }
   if(newDamage<=(vidaTotalPositiva-faseSalud*2) && newDamage>=(vidaTotalPositiva-faseSalud*3)){
     if(newDamage!==0){
@@ -83,14 +87,47 @@ export const BarraVida = ({nombreN,fortalezaN, kiN, positivaN,setPositivaN, nega
     }
   }
 
-   if(newDamage>vidaTotalPositiva && newDamage<=(vidaTotalPositiva+faseSalud)){
+  if(newDamage<=(vidaTotalPositiva-faseSalud*3)){
+    if(positivaN>=3){
+      if(newDamage!==0){
+        estadoDeFase="fase RAZGADO"
+       }
+    } 
+}
+
+   if(newDamage>vidaTotalPositiva && newDamage<=(vidaTotalPositiva+faseSalud)){    
+   
+    if(negativaN==1){
+       estadoDeFase="fase MORIBUNDO"
+    }else if(negativaN==2){
+      estadoDeFase="fase INCAPACITADO"
+    }else if(negativaN>=3){
       estadoDeFase="fase INCONCIENTE"
+    }
    }
+
    if(newDamage>(vidaTotalPositiva+faseSalud) && newDamage<=(vidaTotalPositiva+faseSalud*2)){
-    estadoDeFase="fase iNCAPACITADO"
+
+    if(negativaN==1){
+      estadoDeFase="fase MORIBUNDO"
+   }else if(negativaN==2){
+     estadoDeFase="fase MORIBUNDO"
+     console.log("********entre en el moribundo de 2 fase negativas")
+   }else if(negativaN>=3){
+     estadoDeFase="fase INCAPACITADO"
+   }
+    //estadoDeFase="fase iNCAPACITADO"
    }
    if(newDamage>(vidaTotalPositiva+faseSalud*2) && newDamage<=(vidaTotalPositiva+faseSalud*3)){
-    estadoDeFase="fase MORIBUNDO"
+    
+    if(negativaN==1){
+      estadoDeFase=""
+   }else if(negativaN==2){
+     estadoDeFase=""
+   }else if(negativaN>=3){
+     estadoDeFase="fase MORIBUNDO"
+   }
+    //estadoDeFase="fase MORIBUNDO"
    }
   
 
