@@ -10,7 +10,7 @@ import {BarraVida} from "./barraVida.jsx";
 import { Hechizos } from './hechizos.jsx';
 import { Historia } from './historia.jsx';
 
-
+import Accordion from 'react-bootstrap/Accordion';
 
 /*
 <div className='col1'>
@@ -629,6 +629,7 @@ useEffect(() => {
     <>
     <div className='container'>
          <p style={{color:"yellow", fontSize:"50px", fontFamily:"cursive",display:"grid",justifyItems:"center"}}>{nombreN}</p>
+        
         <div className='row col2' >
           <div className='col1'>
             <img src={imagenN} alt="imagen del personaje" className={vivoMuerto ? "imagenPj" : "muertoPJ"} />
@@ -671,145 +672,192 @@ useEffect(() => {
           </div>
         </div>
          
-     <div style={{padding:"40px", marginLeft:"40px"}}>
-      
-      <BarraVida nombreN={nombreN} fortalezaN={fortalezaN} kiN={kiN} positivaN={positivaN} setPositivaN={setPositivaN} negativaN={negativaN} setNegativaN={setNegativaN} damageActualN={damageActualN} setDamageActualN={setDamageActualN}></BarraVida>
-      <BarraKi nombreN={nombreN} consumisionN={consumisionN} setConsumisionN={setConsumisionN} kiN={kiN} kiActualN={kiActualN} setKiActualN={setKiActualN}></BarraKi>
-      <BarraKen nombreN={nombreN} kenN={kenN} kenActualN={kenActualN} setKenActualN={setKenActualN}></BarraKen>
-  
-    </div>
-    <div className="col4 gradComp" style={{marginTop:"10px", padding:"15px"}}>
     
-      <div className="col1" >          
-        <label htmlFor="">Fuerza:</label>
-        <input type="number" value={fuerzaN} onChange={handleChangeFuerza} placeholder="Fza" />
-        <label htmlFor="">Fortaleza:</label>
-        <input type="number" value={fortalezaN} onChange={handleChangeFortaleza} placeholder="Fort" />
-        <label htmlFor="">Destreza:</label>
-        <input type="number" value={destrezaN} onChange={handleChangeDestreza} placeholder="Des"/>
-        <label htmlFor="">Agilidad</label>
-        <input type="number" value={agilidadN} onChange={handleChangeAgilidad} placeholder="Agi" />          
-        <label htmlFor="">Sabiduria</label>
-        <input type="number" value={sabiduriaN} onChange={handleChangeSabiduria} placeholder="Sab" />
-        <label htmlFor="">Presencia</label>
-        <input type="number" value={presenciaN} onChange={handleChangePresencia} placeholder="Pre" />
-        <label htmlFor="">Principio</label>
-        <input type="number" value={principioN} onChange={handleChangePrincipio} placeholder="Pri" />
-        <label htmlFor="">Sentidos</label>
-        <input type="number" value={sentidosN} onChange={handleChangeSentidos} placeholder="Sen" />
-
-        <div className='col1' style={{marginTop:"20px"}}>
-        <label htmlFor="">Iniciativa</label>
-        <input type="number" style={{borderRadius:"20px", color:"yellow"}} value={iniciativaN} onChange={handleChangeIniciativa} placeholder="0" />
+        <div style={{padding:"40px", marginLeft:"40px"}}>  
+          <BarraVida nombreN={nombreN} fortalezaN={fortalezaN} kiN={kiN} positivaN={positivaN} setPositivaN={setPositivaN} negativaN={negativaN} setNegativaN={setNegativaN} damageActualN={damageActualN} setDamageActualN={setDamageActualN}></BarraVida>
+          <BarraKi nombreN={nombreN} consumisionN={consumisionN} setConsumisionN={setConsumisionN} kiN={kiN} kiActualN={kiActualN} setKiActualN={setKiActualN}></BarraKi>
+          <BarraKen nombreN={nombreN} kenN={kenN} kenActualN={kenActualN} setKenActualN={setKenActualN}></BarraKen>
         </div>
-        
 
-        
-    
-      </div>
-      <div className='col1'>
-      <label htmlFor="">Academisismo</label>
-        <input type="number" value={academisismoN} onChange={handleChangeAcademisismo} placeholder="0" />
-        <label htmlFor="">Alerta</label>
-        <input type="number" value={alertaN} onChange={handleChangeAlerta} placeholder="0" />
-        <label htmlFor="">Atletismo</label>
-        <input type="number" value={atletismoN} onChange={handleChangeAtletismo} placeholder="0" />        
-        <label htmlFor="">Con. Bakemono</label>
-        <input type="number" value={conBakemonoN} onChange={handleChangeConBakemono} placeholder="0" />
-        <label htmlFor="">Mentir</label>
-        <input type="number" value={mentirN} onChange={handleChangeMentir} placeholder="0" />
-        <label htmlFor="">Pilotear</label>
-        <input type="number" value={pilotearN} onChange={handleChangePilotear} placeholder="0" />
-        <label htmlFor="">Artes marciales</label>
-        <input type="number" value={artesMarcialesN} onChange={handleChangeArtesMarciales} placeholder="0" />
-        <input style={{border:"3px solid black", width:"80%"}} type="text" value={apCombateN} onChange={handleChangeApCombate} placeholder="ingrese Arma:"/>
-        <input type="number" value={valCombateN} onChange={handleChangeValCombate} placeholder="0"/>
-        <input style={{border:"3px solid black", width:"80%"}} type="text" value={apCombate2N} onChange={handleChangeApCombate2} placeholder="ingrese Arma:"/>
-        <input type="number" value={valCombate2N} onChange={handleChangeValCombate2} placeholder="0"/>
+        </div>
 
-        <input style={{border:"3px solid black", width:"80%"}} type="text" value={add1N} onChange={handleChangeAdd1} placeholder="Ap. nueva:"/>
-          <input type="number" value={valAdd1N} onChange={handleChangeValAdd1} placeholder="0"/>
-          <input style={{border:"3px solid black", width:"80%"}} type="text" value={add2N} onChange={handleChangeAdd2} placeholder="Ap. nueva:"/>
-          <input type="number" value={valAdd2N} onChange={handleChangeValAdd2} placeholder="0"/>
+      <Accordion defaultActiveKey={['0']} alwaysOpen>
+      <Accordion.Item eventKey="0">
+        <Accordion.Header style={{textAlign:"center"}}>Caracteristicas</Accordion.Header>
+        <Accordion.Body style={{backgroundColor:"black", padding:"0px"}}>
+       
+        <div className="col4 gradComp" style={{padding:"15px"}}>
+        
+        <div className="col1" >          
+          <label htmlFor="">Fuerza:</label>
+          <input type="number" value={fuerzaN} onChange={handleChangeFuerza} placeholder="Fza" />
+          <label htmlFor="">Fortaleza:</label>
+          <input type="number" value={fortalezaN} onChange={handleChangeFortaleza} placeholder="Fort" />
+          <label htmlFor="">Destreza:</label>
+          <input type="number" value={destrezaN} onChange={handleChangeDestreza} placeholder="Des"/>
+          <label htmlFor="">Agilidad</label>
+          <input type="number" value={agilidadN} onChange={handleChangeAgilidad} placeholder="Agi" />          
+          <label htmlFor="">Sabiduria</label>
+          <input type="number" value={sabiduriaN} onChange={handleChangeSabiduria} placeholder="Sab" />
+          <label htmlFor="">Presencia</label>
+          <input type="number" value={presenciaN} onChange={handleChangePresencia} placeholder="Pre" />
+          <label htmlFor="">Principio</label>
+          <input type="number" value={principioN} onChange={handleChangePrincipio} placeholder="Pri" />
+          <label htmlFor="">Sentidos</label>
+          <input type="number" value={sentidosN} onChange={handleChangeSentidos} placeholder="Sen" />
+
+          <div className='col1' style={{marginTop:"20px"}}>
+          <label htmlFor="">Iniciativa</label>
+          <input type="number" style={{borderRadius:"20px", color:"yellow"}} value={iniciativaN} onChange={handleChangeIniciativa} placeholder="0" />
+          </div>
+          
+
+          
       
-      </div>
+        </div>
+        <div className='col1'>
+        <label htmlFor="">Academisismo</label>
+          <input type="number" value={academisismoN} onChange={handleChangeAcademisismo} placeholder="0" />
+          <label htmlFor="">Alerta</label>
+          <input type="number" value={alertaN} onChange={handleChangeAlerta} placeholder="0" />
+          <label htmlFor="">Atletismo</label>
+          <input type="number" value={atletismoN} onChange={handleChangeAtletismo} placeholder="0" />        
+          <label htmlFor="">Con. Bakemono</label>
+          <input type="number" value={conBakemonoN} onChange={handleChangeConBakemono} placeholder="0" />
+          <label htmlFor="">Mentir</label>
+          <input type="number" value={mentirN} onChange={handleChangeMentir} placeholder="0" />
+          <label htmlFor="">Pilotear</label>
+          <input type="number" value={pilotearN} onChange={handleChangePilotear} placeholder="0" />
+          <label htmlFor="">Artes marciales</label>
+          <input type="number" value={artesMarcialesN} onChange={handleChangeArtesMarciales} placeholder="0" />
+          <input style={{border:"3px solid black", width:"80%"}} type="text" value={apCombateN} onChange={handleChangeApCombate} placeholder="ingrese Arma:"/>
+          <input type="number" value={valCombateN} onChange={handleChangeValCombate} placeholder="0"/>
+          <input style={{border:"3px solid black", width:"80%"}} type="text" value={apCombate2N} onChange={handleChangeApCombate2} placeholder="ingrese Arma:"/>
+          <input type="number" value={valCombate2N} onChange={handleChangeValCombate2} placeholder="0"/>
 
-      <div className='col1'>
-        <label htmlFor="">Medicina</label>
-        <input type="number" value={medicinaN} onChange={handleChangeMedicina} placeholder="0" />
-        <label htmlFor="">Con. Obj Magicos</label>
-        <input type="number" value={conObjMagicosN} onChange={handleChangeObjMagicos} placeholder="0" />
-        <label htmlFor="">Sigilo</label>
-        <input type="number" value={sigiloN} onChange={handleChangeSigilo} placeholder="0" />
-        <label htmlFor="">Con. de Esferas</label>
-        <input type="number" value={conEsferasN} onChange={handleChangeConEsferas} placeholder="0" />  
-        <label htmlFor="">Con. de Leyendas</label>
-        <input type="number" value={conLeyendasN} onChange={handleChangeConLeyendas} placeholder="0" />
-        <label htmlFor="">Forja</label>
-        <input type="number" value={forjaN} onChange={handleChangeForja} placeholder="0" />
-        <label htmlFor="">Con. Demonio</label>
-        <input type="number" value={conDemonioN} onChange={handleChangeConDemonio} placeholder="0" />
-        <label htmlFor="">Con. Espiritual</label>
-        <input type="number" value={conEspiritualN} onChange={handleChangeConEspiritual} placeholder="0" />
-        <label htmlFor="">Manejo de Blaster</label>
-        <input type="number" value={manejoBlasterN} onChange={handleChangeManejoBlaster} placeholder="0" />
-
+          <input style={{border:"3px solid black", width:"80%"}} type="text" value={add1N} onChange={handleChangeAdd1} placeholder="Ap. nueva:"/>
+            <input type="number" value={valAdd1N} onChange={handleChangeValAdd1} placeholder="0"/>
+            <input style={{border:"3px solid black", width:"80%"}} type="text" value={add2N} onChange={handleChangeAdd2} placeholder="Ap. nueva:"/>
+            <input type="number" value={valAdd2N} onChange={handleChangeValAdd2} placeholder="0"/>
         
-        <input style={{border:"3px solid black", width:"80%"}} type="text" value={add3N} onChange={handleChangeAdd3} placeholder="Ap. nueva:"/>
-          <input type="number" value={valAdd3N} onChange={handleChangeValAdd3} placeholder="0"/>
-          <input style={{border:"3px solid black", width:"80%"}} type="text" value={add4N} onChange={handleChangeAdd4} placeholder="Ap. nueva:"/>
-          <input type="number" value={valAdd4N} onChange={handleChangeValAdd4} placeholder="0"/>
+        </div>
+
+        <div className='col1'>
+          <label htmlFor="">Medicina</label>
+          <input type="number" value={medicinaN} onChange={handleChangeMedicina} placeholder="0" />
+          <label htmlFor="">Con. Obj Magicos</label>
+          <input type="number" value={conObjMagicosN} onChange={handleChangeObjMagicos} placeholder="0" />
+          <label htmlFor="">Sigilo</label>
+          <input type="number" value={sigiloN} onChange={handleChangeSigilo} placeholder="0" />
+          <label htmlFor="">Con. de Esferas</label>
+          <input type="number" value={conEsferasN} onChange={handleChangeConEsferas} placeholder="0" />  
+          <label htmlFor="">Con. de Leyendas</label>
+          <input type="number" value={conLeyendasN} onChange={handleChangeConLeyendas} placeholder="0" />
+          <label htmlFor="">Forja</label>
+          <input type="number" value={forjaN} onChange={handleChangeForja} placeholder="0" />
+          <label htmlFor="">Con. Demonio</label>
+          <input type="number" value={conDemonioN} onChange={handleChangeConDemonio} placeholder="0" />
+          <label htmlFor="">Con. Espiritual</label>
+          <input type="number" value={conEspiritualN} onChange={handleChangeConEspiritual} placeholder="0" />
+          <label htmlFor="">Manejo de Blaster</label>
+          <input type="number" value={manejoBlasterN} onChange={handleChangeManejoBlaster} placeholder="0" />
+
+          
+          <input style={{border:"3px solid black", width:"80%"}} type="text" value={add3N} onChange={handleChangeAdd3} placeholder="Ap. nueva:"/>
+            <input type="number" value={valAdd3N} onChange={handleChangeValAdd3} placeholder="0"/>
+            <input style={{border:"3px solid black", width:"80%"}} type="text" value={add4N} onChange={handleChangeAdd4} placeholder="Ap. nueva:"/>
+            <input type="number" value={valAdd4N} onChange={handleChangeValAdd4} placeholder="0"/>
 
 
 
-      </div>
+        </div>
 
-      <div className='col1'>
-        <label htmlFor="">Manejo de sombras</label>
-        <input type="number" value={manejoSombrasN} onChange={handleChangeManejoSombras} placeholder="0" />
-        <label htmlFor="">Trato Bakemono</label>
-        <input type="number" value={tratoBakemonoN} onChange={handleChangeTratoBakemono} placeholder="0" />
-        <label htmlFor="">Con. de hechiceria</label>
-        <input type="number" value={conHechiceriaN} onChange={handleChangeConHechiceria} placeholder="0" />
-        <label htmlFor="">Meditacion vital</label>
-        <input type="number" value={medVitalN} onChange={handleChangeMedVital} placeholder="0" />
-        <label htmlFor="">Meditacion Espiritual</label>
-        <input type="number" value={medEspiritualN} onChange={handleChangeMedEspiritual} placeholder="0" />
-        <label htmlFor="">Res. Esp. Rayo</label>
-        <input type="number" value={rayoN} onChange={handleChangeRayo} placeholder="0" />
-        <label htmlFor="">Res. Esp. Veneno</label>
-        <input type="number" value={venenoN} onChange={handleChangeVeneno} placeholder="0" />
-        <label htmlFor="">Res. Esp. Fuego</label>
-        <input type="number" value={fuegoN} onChange={handleChangeFuego} placeholder="0" />
-        <label htmlFor="">Res Esp. Frio</label>
-        <input type="number" value={frioN} onChange={handleChangeFrio} placeholder="0" />
-        <label htmlFor="">Res. Esp. Corte</label>
-        <input type="number" value={corteN} onChange={handleChangeCorte} placeholder="0" />
-        <label htmlFor="">Res. Esp. Energia</label>
-        <input type="number" value={energiaN} onChange={handleChangeEnergia} placeholder="0" />
+        <div className='col1'>
+          <label htmlFor="">Manejo de sombras</label>
+          <input type="number" value={manejoSombrasN} onChange={handleChangeManejoSombras} placeholder="0" />
+          <label htmlFor="">Trato Bakemono</label>
+          <input type="number" value={tratoBakemonoN} onChange={handleChangeTratoBakemono} placeholder="0" />
+          <label htmlFor="">Con. de hechiceria</label>
+          <input type="number" value={conHechiceriaN} onChange={handleChangeConHechiceria} placeholder="0" />
+          <label htmlFor="">Meditacion vital</label>
+          <input type="number" value={medVitalN} onChange={handleChangeMedVital} placeholder="0" />
+          <label htmlFor="">Meditacion Espiritual</label>
+          <input type="number" value={medEspiritualN} onChange={handleChangeMedEspiritual} placeholder="0" />
+          <label htmlFor="">Res. Esp. Rayo</label>
+          <input type="number" value={rayoN} onChange={handleChangeRayo} placeholder="0" />
+          <label htmlFor="">Res. Esp. Veneno</label>
+          <input type="number" value={venenoN} onChange={handleChangeVeneno} placeholder="0" />
+          <label htmlFor="">Res. Esp. Fuego</label>
+          <input type="number" value={fuegoN} onChange={handleChangeFuego} placeholder="0" />
+          <label htmlFor="">Res Esp. Frio</label>
+          <input type="number" value={frioN} onChange={handleChangeFrio} placeholder="0" />
+          <label htmlFor="">Res. Esp. Corte</label>
+          <input type="number" value={corteN} onChange={handleChangeCorte} placeholder="0" />
+          <label htmlFor="">Res. Esp. Energia</label>
+          <input type="number" value={energiaN} onChange={handleChangeEnergia} placeholder="0" />
 
-      </div>  
+        </div>  
 
-    </div>
+        </div>
+          
+        </Accordion.Body>
+      </Accordion.Item>
+      <Accordion.Item eventKey="1">
+        <Accordion.Header>Ventajas y desventajas</Accordion.Header>
+        <Accordion.Body  style={{backgroundColor:"black"}}>
+         <div>
+          <VentajasN ventajasN={ventajasN} setVentajasN={setVentajasN}></VentajasN>
+         </div>
+        </Accordion.Body>
+      </Accordion.Item>
+
+
+      <Accordion.Item eventKey="2">
+        <Accordion.Header style={{textAlign:"center"}}>Inventario</Accordion.Header>
+        <Accordion.Body  style={{backgroundColor:"black"}}>
+        <div>
+          <Inventario inventarioN={inventarioN} setInventarioN={setInventarioN}></Inventario>
+        </div>
+        </Accordion.Body>
+      </Accordion.Item>
+
+      <Accordion.Item eventKey="3">
+        <Accordion.Header>Dominios y Tecnicas</Accordion.Header>
+        <Accordion.Body  style={{backgroundColor:"black"}}>
+        <div>
+        <Dominios dominiosN={dominiosN} setDominiosN={setDominiosN}></Dominios>
+        </div>
+        </Accordion.Body>
+      </Accordion.Item>
+
+      <Accordion.Item eventKey="4">
+        <Accordion.Header>Hechiceria</Accordion.Header>
+        <Accordion.Body  style={{backgroundColor:"black"}}>
+        <div>
+        <Hechizos hechizosN={hechizosN} setHechizosN={setHechizosN}></Hechizos>
+        </div>
+         
+        </Accordion.Body>
+      </Accordion.Item>
+
+      <Accordion.Item eventKey="5">
+        <Accordion.Header>Historia de personaje</Accordion.Header>
+        <Accordion.Body  style={{backgroundColor:"black"}}>
+        <div>
+        <Historia historiaN={historiaN} setHistoriaN={setHistoriaN}></Historia>
+        </div>
+        </Accordion.Body>
+      </Accordion.Item>
+
+    </Accordion>   
 
      
-    </div>
+   
+
+
+
     <div style={{padding:"2rem"}}>
-    <div>
-      <VentajasN ventajasN={ventajasN} setVentajasN={setVentajasN}></VentajasN>
-    </div>
-    <div>
-       <Inventario inventarioN={inventarioN} setInventarioN={setInventarioN}></Inventario>
-    </div>
-    <div>
-       <Dominios dominiosN={dominiosN} setDominiosN={setDominiosN}></Dominios>
-    </div>
-    <div>
-       <Hechizos hechizosN={hechizosN} setHechizosN={setHechizosN}></Hechizos>
-    </div>
-    <div>
-       <Historia historiaN={historiaN} setHistoriaN={setHistoriaN}></Historia>
-    </div>
+     
     <div className='col1'>
       <button className='btn btn-danger' onClick={handleEliminarPj} style={{width:"150px", marginTop:"10px"}}>Eliminar personaje</button>
     </div>

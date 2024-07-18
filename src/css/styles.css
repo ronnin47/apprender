@@ -2,10 +2,19 @@ html,body{
     height: 100%;
     margin: 0;
     padding: 0;
-    background-image: url('../assets/imgBody.jpg');
+    background-image: url('../assets/logo.jpeg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+   
+}
+.imgZnk{
+    background-image: url('../assets/logo.jpeg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.94;
+
 }
 .miniCartas{
     display: grid;
@@ -164,9 +173,8 @@ background-color: rgb(0, 0, 0);
     margin-top: 10px;   
 }
 .gradComp{
-    border: 3px solid red;
-    border-radius: 15px;   
-    margin-top: 10px;
+    border: 3px solid black;
+    border-radius: 15px;  
     background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(48,121,9,1) 57%, rgba(0,212,255,1) 100%);
 }

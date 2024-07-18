@@ -24,7 +24,7 @@ export const Principal= ()=> {
     const [pjSeleccionado,setPjSeleccionado]=useState("")
 
     const [nombre,setNombre]=useState("")
-    const [imagen,setImagen]=useState("/imgBase.jpg")
+    const [imagen,setImagen]=useState("/imagenBase.jpeg")
     const [dominio,setDominio]=useState("")
     const [raza,setRaza]=useState("")
     const [edad,setEdad]=useState("")
@@ -312,7 +312,7 @@ export const Principal= ()=> {
       </Accordion.Item>
       <Accordion.Item eventKey="1" >
         <Accordion.Header>Personajes cargados</Accordion.Header>
-        <Accordion.Body className="container-fluid fondoBody">   
+        <Accordion.Body className="container-fluid fondoBody imgZnk">   
             <DndContext collisionDetection={closestCenter}
               onDragEnd={handleDragEnd}>
                 <SortableContext items={personajes} strategy={horizontalListSortingStrategy}>
