@@ -513,7 +513,7 @@ export const CargarPersonaje = ({
     setValAdd4("");
 
     
-    setImagen("/imgBase.jpg");
+    setImagen("/imagenBase.jpeg");
     setVentajas([]);
     
 

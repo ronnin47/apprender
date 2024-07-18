@@ -10,6 +10,10 @@ import { SortableContext, horizontalListSortingStrategy, arrayMove,verticalListS
 
 import Swal from 'sweetalert2';
 
+import Badge from 'react-bootstrap/Badge';
+
+
+
 export const Principal= ()=> {
     const [personajes, setPersonajes] = useState(() => {
         const storedPersonajes = localStorage.getItem("personajes");
@@ -151,6 +155,13 @@ export const Principal= ()=> {
         }
     });
 };
+
+
+
+//aca trabajamos con los badge
+
+const [fuerzaBadge,setFuerzaBadge]=useState("");
+
 
   return (
     <>
@@ -415,7 +426,6 @@ export const Principal= ()=> {
             historia={pj.historia}
             naturaleza={pj.naturaleza}
             eliminarPj={eliminarPj}
-
 
 
           />

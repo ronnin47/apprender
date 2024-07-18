@@ -12,6 +12,8 @@ import { Historia } from './historia.jsx';
 
 import Accordion from 'react-bootstrap/Accordion';
 
+
+import Badge from 'react-bootstrap/Badge';
 /*
 <div className='col1'>
     <button className="btn btn-success" style={{width:"150px", marginTop:"10px"}} onClick={btnGuardarCambios}>Guardar cambios</button>
@@ -623,6 +625,30 @@ useEffect(() => {
     };
 
 
+/*
+    const subirFuerzaBadge=()=>{
+      console.log("funciona subir fuerza badge");
+      if (fuerzaBadge === "") {
+        setFuerzaBadge(1);
+      } else {
+        setFuerzaBadge(prevFuerzaBadge => Number(prevFuerzaBadge) + 1);
+      }
+    }
+    
+    const bajarFuerzaBadge = (event) => {
+      event.stopPropagation();
+      setFuerzaBadge(prevFuerzaBadge => {
+        const newValue = prevFuerzaBadge - 1;
+        return newValue <= 0 ? "" : newValue;
+      });
+    };
+ 
+    aca tenemos el label con el badge
+ <label htmlFor="" onClick={subirFuerzaBadge} >Fuerza: <Badge onClick={bajarFuerzaBadge}>{fuerzaBadge}</Badge> </label>
+*/
+
+
+
  
 
   return (
@@ -689,7 +715,7 @@ useEffect(() => {
         <div className="col4 gradComp" style={{padding:"15px"}}>
         
         <div className="col1" >          
-          <label htmlFor="">Fuerza:</label>
+          <label htmlFor="" >Fuerza:</label>
           <input type="number" value={fuerzaN} onChange={handleChangeFuerza} placeholder="Fza" />
           <label htmlFor="">Fortaleza:</label>
           <input type="number" value={fortalezaN} onChange={handleChangeFortaleza} placeholder="Fort" />
