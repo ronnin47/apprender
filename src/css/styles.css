@@ -398,3 +398,18 @@ background-color: rgb(0, 0, 0);
     padding: 1em;
     border-radius: 15px;
 }
+
+.cajaMacros{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 1em;
+    margin-top: 2em;
+}
+.macros{
+    margin: 2em;
+}
+
+.guardados{
+    display: grid;
+    grid-template-columns:  50% 20% 20%;
+}

@@ -2,6 +2,9 @@ import { useEffect, useState, useRef } from "react"
 
 import 'animate.css';
 import { io } from 'socket.io-client';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Swal from 'sweetalert2';
 
 const socket = io(process.env.REACT_APP_BACKEND_URL);
 //REACT_APP_BACKEND_URL=https://tu-backend-en-render.onrender.com
@@ -15,16 +18,26 @@ function generarNumerosAzarSinRangoMin(cantidad, rangoMax) {
   return numeros;
 }
 
-
+/*
+<select value={selectedButton} onChange={handleInputChange}>
+        <option value={1}>Boton 1</option>
+        <option value={2}>Boton 2</option>
+        <option value={3}>Boton 3</option>
+        <option value={4}>Boton 4</option>
+        <option value={5}>Boton 5</option>
+        <option value={6}>Boton 6</option>
+        <option value={7}>Boton 7</option>
+        <option value={8}>Boton 8</option>
+        <option value={9}>Boton 9</option>
+        <option value={10}>Boton 10</option>
+      </select>
+*/
 
 export const Tiradas = ({nombre, message,setMessage,sock,setSock}) => {
- 
+
 const [valTirada,setValTirada]=useState("")
 const [sumaTirada,setSumaTirada]=useState("")
 
-
-
-//acaaa
 const[valTiradaD6,setValTiradaD6]=useState("")
 const[valTiradaD4,setValTiradaD4]=useState("")
 
@@ -173,6 +186,10 @@ const[dadosD10,setDadosD10]=useState(0)
 const[dadosD20,setDadosD20]=useState(0)
 const[dadosD10Bono,setDadosD10Bono]=useState(0)
 
+const [nombreTirada,setNombreTirada]=useState("")
+
+//SELECTOR DEL BOTON DONDE SE GUARDARA LA TIRADA
+const [selectedButton, setSelectedButton] = useState(1);
 
 
 const addD10=()=>{
@@ -241,6 +258,361 @@ const handleSecundaria=(event)=>{
   setSecundaria(event.target.value)
 }
 
+//botones state de los seis botones
+const [boton1, setBoton1] = useState(() => {
+  // Recuperar del localStorage si existe, si no, utilizar un valor por defecto
+  const storedValue = localStorage.getItem(`boton1_${nombre}`);
+  return storedValue ? JSON.parse(storedValue) : "Boton 1";
+});
+const [boton2, setBoton2] = useState(() => {
+  // Recuperar del localStorage si existe, si no, utilizar un valor por defecto
+  const storedValue = localStorage.getItem(`boton2_${nombre}`);
+  return storedValue ? JSON.parse(storedValue) : "Boton 2";
+});
+const [boton3, setBoton3] = useState(() => {
+  // Recuperar del localStorage si existe, si no, utilizar un valor por defecto
+  const storedValue = localStorage.getItem(`boton3_${nombre}`);
+  return storedValue ? JSON.parse(storedValue) : "Boton 3";
+});
+const [boton4, setBoton4] = useState(() => {
+  // Recuperar del localStorage si existe, si no, utilizar un valor por defecto
+  const storedValue = localStorage.getItem(`boton4_${nombre}`);
+  return storedValue ? JSON.parse(storedValue) : "Boton 4";
+});
+const [boton5, setBoton5] = useState(() => {
+  // Recuperar del localStorage si existe, si no, utilizar un valor por defecto
+  const storedValue = localStorage.getItem(`boton5_${nombre}`);
+  return storedValue ? JSON.parse(storedValue) : "Boton 5";
+});
+const [boton6, setBoton6] = useState(() => {
+  // Recuperar del localStorage si existe, si no, utilizar un valor por defecto
+  const storedValue = localStorage.getItem(`boton6_${nombre}`);
+  return storedValue ? JSON.parse(storedValue) : "Boton 6";
+});
+const [boton7, setBoton7] = useState(() => {
+  // Recuperar del localStorage si existe, si no, utilizar un valor por defecto
+  const storedValue = localStorage.getItem(`boton7_${nombre}`);
+  return storedValue ? JSON.parse(storedValue) : "Boton 7";
+});
+const [boton8, setBoton8] = useState(() => {
+  // Recuperar del localStorage si existe, si no, utilizar un valor por defecto
+  const storedValue = localStorage.getItem(`boton8_${nombre}`);
+  return storedValue ? JSON.parse(storedValue) : "Boton 8";
+});
+const [boton9, setBoton9] = useState(() => {
+  // Recuperar del localStorage si existe, si no, utilizar un valor por defecto
+  const storedValue = localStorage.getItem(`boton9_${nombre}`);
+  return storedValue ? JSON.parse(storedValue) : "Boton 9";
+});
+const [boton10, setBoton10] = useState(() => {
+  // Recuperar del localStorage si existe, si no, utilizar un valor por defecto
+  const storedValue = localStorage.getItem(`boton10_${nombre}`);
+  return storedValue ? JSON.parse(storedValue) : "Boton 10";
+});
+//console.log("este es el contenido de boton 1: "+boton1)
+
+//console.log(boton1.nombreTirada)
+/************************************************** */
+
+//GUARDAR TIRADA
+const guardarTiradaMacro=()=>{
+ // Crear el objeto con los valores
+
+ Swal.fire({
+  title: `Deseas guardar la accion ${nombreTirada} en el boton ${selectedButton}?`,
+  showDenyButton: true,
+  showCancelButton: true,
+  confirmButtonText: "Guardar",
+  denyButtonText: `No guardar`
+}).then((result) => {
+  /* Read more about isConfirmed, isDenied below */
+  if (result.isConfirmed) {
+    const tirada = {
+      principal: principal || 0,
+      secundaria: secundaria || 0,
+      dadosD10: dadosD10 || 0,
+      dadosD20: dadosD20 || 0,
+      dadosD10Bono: dadosD10Bono || 0,
+      dadosD6Bono: dadosD6Bono || 0,
+      dadosD4Bono: dadosD4Bono || 0,
+      nombreTirada: nombreTirada,
+      nombre:nombre,
+    };
+    
+    console.log(tirada)
+    
+    //guardamos el boton1 del nombre
+    localStorage.setItem(`boton${selectedButton}_${nombre}`, JSON.stringify(tirada));
+    //TIENE QUE HACER EL SET AL BOTON SELECCIONADO
+    switch(selectedButton){
+      case 1:
+        setBoton1(tirada);
+      break
+      case 2:
+        setBoton2(tirada);
+      break
+      case 3:
+        setBoton3(tirada);
+      break
+      case 4:
+        setBoton4(tirada);
+      break
+      case 5:
+        setBoton5(tirada);
+      break
+      case 6:
+        setBoton6(tirada);
+      break
+      case 7:
+        setBoton7(tirada);
+      break
+      case 8:
+        setBoton8(tirada);
+      break
+      case 9:
+        setBoton9(tirada);
+      break
+      case 10:
+        setBoton10(tirada);
+      break
+    }
+    
+    
+    
+    console.log("BOTON ESCOGIDO: "+selectedButton)
+    
+    //LIMPIAR IMPUT 
+    setNombreTirada("");
+
+    Swal.fire("Accion guardada!", "", "tirada guardada");
+  } else if (result.isDenied) {
+    Swal.fire("La accion no se guardo", "", "info");
+    //LIMPIAR IMPUT 
+    setNombreTirada("");
+  }
+});
+
+
+
+
+
+
+}
+
+
+
+
+const handleInputChange = (event) => {
+  setSelectedButton(parseInt(event.target.value, 10));
+
+};
+
+
+//ESTO VIENE LUEGUINNNN
+const cargarTirada1=()=>{
+  console.log("funciona boton Tirada 1")
+
+
+   const principal1=parseInt(boton1.principal) || 0;
+   setPrincipal(principal1);
+   const secundaria1=parseInt(boton1.secundaria) || 0;
+   setSecundaria(secundaria1);
+   const dadosD101=parseInt(boton1.dadosD10) || 0;
+   setDadosD10(dadosD101);
+   const dadosD10Bono1=parseInt(boton1.dadosD10Bono) || 0;
+   setDadosD10Bono(dadosD10Bono1)
+   const dadosD201=parseInt(boton1.dadosD20) || 0;
+   setDadosD20(dadosD201); 
+   const dadosD061=parseInt(boton1.dadosD6Bono) || 0;
+   setDadosD6Bono(dadosD061); 
+   const dadosD041=parseInt(boton1.dadosD4Bono) || 0;
+   setDadosD4Bono(dadosD041); 
+}
+
+
+const cargarTirada2=()=>{
+  console.log("funciona boton Tirada2")
+
+  
+  const principal2=boton2.principal || 0;
+  setPrincipal(principal2);
+  const secundaria2=boton2.secundaria  || 0;
+  setSecundaria(secundaria2);
+  const dadosD102=boton2.dadosD10  || 0;
+  setDadosD10(dadosD102);
+  const dadosD10Bono2=boton2.dadosD10Bono  || 0;
+  setDadosD10Bono(dadosD10Bono2)
+  const dadosD202=boton2.dadosD20  || 0;
+  setDadosD20(dadosD202); 
+  const dadosD062=boton2.dadosD6Bono  || 0;
+  setDadosD6Bono(dadosD062); 
+  const dadosD042=boton2.dadosD4Bono  || 0;
+  setDadosD4Bono(dadosD042); 
+}
+const cargarTirada3=()=>{
+  console.log("funciona boton Tirada 3")
+
+  
+  const principal3=boton3.principal  || 0;
+  setPrincipal(principal3);
+  const secundaria3=boton3.secundaria  || 0;
+  setSecundaria(secundaria3);
+  const dadosD103=boton3.dadosD10  || 0;
+  setDadosD10(dadosD103);
+  const dadosD10Bono3=boton3.dadosD10Bono  || 0;
+  setDadosD10Bono(dadosD10Bono3)
+  const dadosD203=boton3.dadosD20  || 0;
+  setDadosD20(dadosD203); 
+  const dadosD063=boton3.dadosD6Bono  || 0;
+  setDadosD6Bono(dadosD063); 
+  const dadosD043=boton3.dadosD4Bono  || 0;
+  setDadosD4Bono(dadosD043); 
+}
+const cargarTirada4=()=>{
+  console.log("funciona boton Tirada 4")
+
+  const principal4=boton4.principal  || 0;
+  setPrincipal(principal4);
+  const secundaria4=boton4.secundaria  || 0;
+  setSecundaria(secundaria4);
+  const dadosD104=boton4.dadosD10  || 0;
+  setDadosD10(dadosD104);
+  const dadosD10Bono4=boton4.dadosD10Bono  || 0;
+  setDadosD10Bono(dadosD10Bono4)
+  const dadosD204=boton4.dadosD20  || 0;
+  setDadosD20(dadosD204); 
+  const dadosD064=boton4.dadosD6Bono  || 0;
+  setDadosD6Bono(dadosD064); 
+  const dadosD044=boton4.dadosD4Bono  || 0;
+  setDadosD4Bono(dadosD044); 
+}
+const cargarTirada5=()=>{
+  console.log("funciona boton Tirada 5")
+
+  
+  const principal5=boton5.principal  || 0;
+  setPrincipal(principal5);
+  const secundaria5=boton5.secundaria  || 0;
+  setSecundaria(secundaria5);
+  const dadosD105=boton5.dadosD10  || 0;
+  setDadosD10(dadosD105);
+  const dadosD10Bono5=boton5.dadosD10Bono  || 0;
+  setDadosD10Bono(dadosD10Bono5)
+  const dadosD205=boton5.dadosD20  || 0;
+  setDadosD20(dadosD205); 
+  const dadosD065=boton5.dadosD6Bono  || 0;
+  setDadosD6Bono(dadosD065); 
+  const dadosD045=boton5.dadosD4Bono  || 0;
+  setDadosD4Bono(dadosD045); 
+}
+const cargarTirada6=()=>{
+  console.log("funciona boton Tirada 6")
+
+  
+  const principal6=boton6.principal  || 0;
+  setPrincipal(principal6);
+  const secundaria6=boton6.secundaria  || 0;
+  setSecundaria(secundaria6);
+  const dadosD106=boton6.dadosD10  || 0;
+  setDadosD10(dadosD106);
+  const dadosD10Bono6=boton6.dadosD10Bono  || 0;
+  setDadosD10Bono(dadosD10Bono6)
+  const dadosD206=boton6.dadosD20  || 0;
+  setDadosD20(dadosD206); 
+  const dadosD066=boton6.dadosD6Bono  || 0;
+  setDadosD6Bono(dadosD066); 
+  const dadosD046=boton6.dadosD4Bono  || 0;
+  setDadosD4Bono(dadosD046); 
+}
+
+const cargarTirada7=()=>{
+  console.log("funciona boton Tirada 7")
+
+  
+  const principal7=boton7.principal  || 0;
+  setPrincipal(principal7);
+  const secundaria7=boton7.secundaria  || 0;
+  setSecundaria(secundaria7);
+  const dadosD107=boton7.dadosD10  || 0;
+  setDadosD10(dadosD107);
+  const dadosD10Bono7=boton7.dadosD10Bono  || 0;
+  setDadosD10Bono(dadosD10Bono7)
+  const dadosD207=boton7.dadosD20  || 0;
+  setDadosD20(dadosD207); 
+  const dadosD067=boton7.dadosD6Bono  || 0;
+  setDadosD6Bono(dadosD067); 
+  const dadosD047=boton7.dadosD4Bono  || 0;
+  setDadosD4Bono(dadosD047); 
+}
+
+const cargarTirada8=()=>{
+  console.log("funciona boton Tirada 8")
+
+  
+  const principal8=boton8.principal  || 0;
+  setPrincipal(principal8);
+  const secundaria8=boton8.secundaria  || 0;
+  setSecundaria(secundaria8);
+  const dadosD108=boton8.dadosD10  || 0;
+  setDadosD10(dadosD108);
+  const dadosD10Bono8=boton8.dadosD10Bono  || 0;
+  setDadosD10Bono(dadosD10Bono8)
+  const dadosD208=boton8.dadosD20  || 0;
+  setDadosD20(dadosD208); 
+  const dadosD068=boton8.dadosD6Bono  || 0;
+  setDadosD6Bono(dadosD068); 
+  const dadosD048=boton8.dadosD4Bono  || 0;
+  setDadosD4Bono(dadosD048); 
+}
+
+const cargarTirada9=()=>{
+  console.log("funciona boton Tirada 9")
+
+  
+  const principal9=boton9.principal  || 0;
+  setPrincipal(principal9);
+  const secundaria9=boton9.secundaria  || 0;
+  setSecundaria(secundaria9);
+  const dadosD109=boton9.dadosD10  || 0;
+  setDadosD10(dadosD109);
+  const dadosD10Bono9=boton9.dadosD10Bono  || 0;
+  setDadosD10Bono(dadosD10Bono9)
+  const dadosD209=boton9.dadosD20  || 0;
+  setDadosD20(dadosD209); 
+  const dadosD069=boton9.dadosD6Bono  || 0;
+  setDadosD6Bono(dadosD069); 
+  const dadosD049=boton9.dadosD4Bono  || 0;
+  setDadosD4Bono(dadosD049); 
+}
+
+const cargarTirada10=()=>{
+  console.log("funciona boton Tirada 10")
+
+  
+  const principal10=boton10.principal  || 0;
+  setPrincipal(principal10);
+  const secundaria10=boton10.secundaria  || 0;
+  setSecundaria(secundaria10);
+  const dadosD1010=boton10.dadosD10  || 0;
+  setDadosD10(dadosD1010);
+  const dadosD10Bono10=boton10.dadosD10Bono  || 0;
+  setDadosD10Bono(dadosD10Bono10)
+  const dadosD2010=boton10.dadosD20  || 0;
+  setDadosD20(dadosD2010); 
+  const dadosD0610=boton10.dadosD6Bono  || 0;
+  setDadosD6Bono(dadosD0610); 
+  const dadosD0410=boton10.dadosD4Bono  || 0;
+  setDadosD4Bono(dadosD0410); 
+}
+
+
+
+
+
+
+const handleNombreTirada=(event)=>{
+  setNombreTirada(event.target.value)
+}
 
 
 
@@ -400,8 +772,51 @@ const handleKeyPress = (event) => {
             <input type="text" id="dadosD4Bono" className="cajaTirada" value={valTiradaD4} placeholder="dados d4 de Bono"readOnly />
         </div>
        </div>
+
+       
  
     </div>
+    <div className="macros">
+
+        <div className="guardados">
+
+        <input type="text" placeholder="nombra tu tirada y guardala en un boton" value={nombreTirada} onChange={handleNombreTirada} style={{backgroundColor:"black", color:"greenyellow", textAlign:"center"
+        }}/>
+          
+        <Form.Select value={selectedButton} onChange={handleInputChange} style={{marginLeft:"2em", width:"8em", backgroundColor:"black", color:"greenyellow"}}>
+        <option value={1}>Boton 1</option>
+        <option value={2}>Boton 2</option>
+        <option value={3}>Boton 3</option>
+        <option value={4}>Boton 4</option>
+        <option value={5}>Boton 5</option>
+        <option value={6}>Boton 6</option>
+        <option value={7}>Boton 7</option>
+        <option value={8}>Boton 8</option>
+        <option value={9}>Boton 9</option>
+        <option value={10}>Boton 10</option>
+        </Form.Select>
+       
+       <Button variant="outline-info"  onClick={guardarTiradaMacro} style={{marginLeft:"2em"}}>guardar</Button>
+
+        </div>
+        
+        
+        <div className="cajaMacros">
+          
+            <Button variant="outline-warning" onClick={cargarTirada1}>{boton1.nombreTirada || "Accion-1"}</Button>
+            <Button variant="outline-warning" onClick={cargarTirada2}>{boton2.nombreTirada || "Accion-2"}</Button>
+            <Button variant="outline-warning" onClick={cargarTirada3}>{boton3.nombreTirada || "Accion-3"}</Button>
+            <Button variant="outline-warning" onClick={cargarTirada4}>{boton4.nombreTirada || "Accion-4"}</Button>
+            <Button variant="outline-warning" onClick={cargarTirada5}>{boton5.nombreTirada || "Accion-5"}</Button>
+            <Button variant="outline-warning" onClick={cargarTirada6}>{boton6.nombreTirada || "Accion-6"}</Button>
+            <Button variant="outline-warning" onClick={cargarTirada7}>{boton7.nombreTirada || "Accion-7"}</Button>
+            <Button variant="outline-warning" onClick={cargarTirada8}>{boton8.nombreTirada || "Accion-8"}</Button>
+            <Button variant="outline-warning" onClick={cargarTirada9}>{boton9.nombreTirada || "Accion-9"}</Button>
+            <Button variant="outline-warning" onClick={cargarTirada10}>{boton10.nombreTirada || "Accion-10"}</Button>
+          </div>
+    </div>
+
+    
     </>
     
   )
