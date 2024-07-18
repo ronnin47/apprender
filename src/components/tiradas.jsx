@@ -18,28 +18,17 @@ function generarNumerosAzarSinRangoMin(cantidad, rangoMax) {
   return numeros;
 }
 
-/*
-<select value={selectedButton} onChange={handleInputChange}>
-        <option value={1}>Boton 1</option>
-        <option value={2}>Boton 2</option>
-        <option value={3}>Boton 3</option>
-        <option value={4}>Boton 4</option>
-        <option value={5}>Boton 5</option>
-        <option value={6}>Boton 6</option>
-        <option value={7}>Boton 7</option>
-        <option value={8}>Boton 8</option>
-        <option value={9}>Boton 9</option>
-        <option value={10}>Boton 10</option>
-      </select>
-*/
 
-export const Tiradas = ({nombre, message,setMessage,sock,setSock}) => {
+export const Tiradas = ({nombre,setMessage,sock,setSock}) => {
 
 const [valTirada,setValTirada]=useState("")
 const [sumaTirada,setSumaTirada]=useState("")
 
 const[valTiradaD6,setValTiradaD6]=useState("")
 const[valTiradaD4,setValTiradaD4]=useState("")
+
+// aca paso 1 para incorporar dados
+const[valTiradaD12,setValTiradaD12]=useState("")
 
 const [valTiradaD10,setValTiradaD10]=useState("")
 const [valTiradaD20,setValTiradaD20]=useState("")
@@ -66,6 +55,7 @@ const [animacionActiva, setAnimacionActiva] = useState(false);
   let tirada=generarNumerosAzarSinRangoMin(cantD10,10);
 
   //acaaaaaaaa 2
+  let d12=generarNumerosAzarSinRangoMin(dadosD12Bono,12);
   let d6=generarNumerosAzarSinRangoMin(dadosD6Bono,6);
   let d4=generarNumerosAzarSinRangoMin(dadosD4Bono,4);
   
@@ -76,6 +66,7 @@ const [animacionActiva, setAnimacionActiva] = useState(false);
   let sumaTirada = tirada.reduce((acumulador, valorActual) => acumulador + valorActual, 0);
   
   //acaaa 3
+  let sumaD12= d12.reduce((acumulador, valorActual)=> acumulador +valorActual,0);
   let sumaD6= d6.reduce((acumulador, valorActual)=> acumulador +valorActual,0);
   let sumaD4= d4.reduce((acumulador, valorActual)=> acumulador +valorActual,0);
 
@@ -84,11 +75,12 @@ const [animacionActiva, setAnimacionActiva] = useState(false);
   let sumaD10Bono= d10Bono.reduce((acumulador, valorActual) => acumulador + valorActual, 0);
 
   // acaaa 4
-  let total=sumaTirada+parseInt(principalValue)+parseInt(secundariaValue)+sumaD10+sumaD20+sumaD10Bono+sumaD6+sumaD4
+  let total=sumaTirada+parseInt(principalValue)+parseInt(secundariaValue)+sumaD10+sumaD20+sumaD10Bono+sumaD6+sumaD4+sumaD12
   
   setValTirada(tirada.join(", "))
   
   //acaaa 5
+  setValTiradaD12(d12.join(", "))
   setValTiradaD6(d6.join(", "))
   setValTiradaD4(d4.join(", "))
 
@@ -102,12 +94,13 @@ const [animacionActiva, setAnimacionActiva] = useState(false);
   let imprimirBase
   
   //acaaa 6
-  let imprimirBonoD6
-  let imprimirBonoD4
+  let imprimirBonoD12;
+  let imprimirBonoD6;
+  let imprimirBonoD4;
 
-  let imprimirBonoD10
-  let imprimirBonoD20
-  let imprimirBonoKen
+  let imprimirBonoD10;
+  let imprimirBonoD20;
+  let imprimirBonoKen;
 
 console.log("suma de la base ", principalValue+secundariaValue)
 const baset=principalValue+secundariaValue
@@ -125,6 +118,13 @@ const baset=principalValue+secundariaValue
   }
 
   //acaaaa 7
+
+  if(d12.length>0){
+    imprimirBonoD12=`Bono D12:    ${d12.join(", ")}`
+  }else{
+    imprimirBonoD12="";
+  }
+
  
   if(d6.length>0){
     imprimirBonoD6=`Bono D6:    ${d6.join(", ")}`
@@ -160,7 +160,7 @@ const baset=principalValue+secundariaValue
   }
   
   //acaaa 8
-  const message = `           Tirada       ${imprimirBase}     ${imprimirTirada}       ${imprimirBonoD10}        ${imprimirBonoD20}        ${imprimirBonoKen}         ${imprimirBonoD6}        ${imprimirBonoD4}       TOTAL: ${total}`;
+  const message = `           Tirada       ${imprimirBase}     ${imprimirTirada}       ${imprimirBonoD10}        ${imprimirBonoD20}        ${imprimirBonoKen}         ${imprimirBonoD6}        ${imprimirBonoD4}       ${imprimirBonoD12}       TOTAL: ${total}`;
   
   const msgEnviar={
     nombre:nombre,
@@ -178,6 +178,8 @@ const baset=principalValue+secundariaValue
 }
 
 //acaaaa 9
+const[dadosD12Bono,setDadosD12Bono]=useState(0);
+
 const[dadosD6Bono,setDadosD6Bono]=useState(0);
 const[dadosD4Bono,setDadosD4Bono]=useState(0)
 
@@ -236,6 +238,15 @@ useEffect(() => {
 
 
 //acaaa 10
+const addD12Bono=()=>{
+  setDadosD12Bono(dadosD12Bono+1)
+}
+const restD12Bono=()=>{
+  setDadosD12Bono(dadosD12Bono-1)
+}
+
+
+
 const addD6Bono=()=>{
   setDadosD6Bono(dadosD6Bono+1)
 }
@@ -335,6 +346,7 @@ const guardarTiradaMacro=()=>{
       dadosD10Bono: dadosD10Bono || 0,
       dadosD6Bono: dadosD6Bono || 0,
       dadosD4Bono: dadosD4Bono || 0,
+      dadosD12Bono: dadosD12Bono || 0,
       nombreTirada: nombreTirada,
       nombre:nombre,
     };
@@ -379,7 +391,7 @@ const guardarTiradaMacro=()=>{
     
     
     
-    console.log("BOTON ESCOGIDO: "+selectedButton)
+    //console.log("BOTON ESCOGIDO: "+selectedButton)
     
     //LIMPIAR IMPUT 
     setNombreTirada("");
@@ -392,26 +404,16 @@ const guardarTiradaMacro=()=>{
   }
 });
 
-
-
-
-
-
 }
-
-
 
 
 const handleInputChange = (event) => {
   setSelectedButton(parseInt(event.target.value, 10));
-
 };
 
 
-//ESTO VIENE LUEGUINNNN
 const cargarTirada1=()=>{
   console.log("funciona boton Tirada 1")
-
 
    const principal1=parseInt(boton1.principal) || 0;
    setPrincipal(principal1);
@@ -426,7 +428,9 @@ const cargarTirada1=()=>{
    const dadosD061=parseInt(boton1.dadosD6Bono) || 0;
    setDadosD6Bono(dadosD061); 
    const dadosD041=parseInt(boton1.dadosD4Bono) || 0;
-   setDadosD4Bono(dadosD041); 
+   setDadosD4Bono(dadosD041);
+   const dadosD121=parseInt(boton1.dadosD12Bono) || 0;
+   setDadosD12Bono(dadosD121); 
 }
 
 
@@ -448,6 +452,8 @@ const cargarTirada2=()=>{
   setDadosD6Bono(dadosD062); 
   const dadosD042=boton2.dadosD4Bono  || 0;
   setDadosD4Bono(dadosD042); 
+  const dadosD122=parseInt(boton2.dadosD12Bono) || 0;
+  setDadosD12Bono(dadosD122); 
 }
 const cargarTirada3=()=>{
   console.log("funciona boton Tirada 3")
@@ -466,7 +472,9 @@ const cargarTirada3=()=>{
   const dadosD063=boton3.dadosD6Bono  || 0;
   setDadosD6Bono(dadosD063); 
   const dadosD043=boton3.dadosD4Bono  || 0;
-  setDadosD4Bono(dadosD043); 
+  setDadosD4Bono(dadosD043);
+  const dadosD123=parseInt(boton3.dadosD12Bono) || 0;
+  setDadosD12Bono(dadosD123);  
 }
 const cargarTirada4=()=>{
   console.log("funciona boton Tirada 4")
@@ -484,7 +492,9 @@ const cargarTirada4=()=>{
   const dadosD064=boton4.dadosD6Bono  || 0;
   setDadosD6Bono(dadosD064); 
   const dadosD044=boton4.dadosD4Bono  || 0;
-  setDadosD4Bono(dadosD044); 
+  setDadosD4Bono(dadosD044);
+  const dadosD124=parseInt(boton4.dadosD12Bono) || 0;
+  setDadosD12Bono(dadosD124);  
 }
 const cargarTirada5=()=>{
   console.log("funciona boton Tirada 5")
@@ -503,7 +513,9 @@ const cargarTirada5=()=>{
   const dadosD065=boton5.dadosD6Bono  || 0;
   setDadosD6Bono(dadosD065); 
   const dadosD045=boton5.dadosD4Bono  || 0;
-  setDadosD4Bono(dadosD045); 
+  setDadosD4Bono(dadosD045);
+  const dadosD125=parseInt(boton5.dadosD12Bono) || 0;
+  setDadosD12Bono(dadosD125);  
 }
 const cargarTirada6=()=>{
   console.log("funciona boton Tirada 6")
@@ -523,6 +535,8 @@ const cargarTirada6=()=>{
   setDadosD6Bono(dadosD066); 
   const dadosD046=boton6.dadosD4Bono  || 0;
   setDadosD4Bono(dadosD046); 
+  const dadosD126=parseInt(boton6.dadosD12Bono) || 0;
+  setDadosD12Bono(dadosD126); 
 }
 
 const cargarTirada7=()=>{
@@ -543,6 +557,8 @@ const cargarTirada7=()=>{
   setDadosD6Bono(dadosD067); 
   const dadosD047=boton7.dadosD4Bono  || 0;
   setDadosD4Bono(dadosD047); 
+  const dadosD127=parseInt(boton7.dadosD12Bono) || 0;
+  setDadosD12Bono(dadosD127); 
 }
 
 const cargarTirada8=()=>{
@@ -562,7 +578,9 @@ const cargarTirada8=()=>{
   const dadosD068=boton8.dadosD6Bono  || 0;
   setDadosD6Bono(dadosD068); 
   const dadosD048=boton8.dadosD4Bono  || 0;
-  setDadosD4Bono(dadosD048); 
+  setDadosD4Bono(dadosD048);
+  const dadosD128=parseInt(boton8.dadosD12Bono) || 0;
+  setDadosD12Bono(dadosD128);  
 }
 
 const cargarTirada9=()=>{
@@ -583,6 +601,8 @@ const cargarTirada9=()=>{
   setDadosD6Bono(dadosD069); 
   const dadosD049=boton9.dadosD4Bono  || 0;
   setDadosD4Bono(dadosD049); 
+  const dadosD129=parseInt(boton9.dadosD12Bono) || 0;
+  setDadosD12Bono(dadosD129); 
 }
 
 const cargarTirada10=()=>{
@@ -603,19 +623,13 @@ const cargarTirada10=()=>{
   setDadosD6Bono(dadosD0610); 
   const dadosD0410=boton10.dadosD4Bono  || 0;
   setDadosD4Bono(dadosD0410); 
+  const dadosD1210=parseInt(boton10.dadosD12Bono) || 0;
+  setDadosD12Bono(dadosD1210); 
 }
-
-
-
-
-
 
 const handleNombreTirada=(event)=>{
   setNombreTirada(event.target.value)
 }
-
-
-
 
 ///const [message, setMessage] = useState('');
 //const [sock, setSock] = useState([]);
@@ -631,16 +645,13 @@ socket.on('message', (newMessage) => {
   };
 }, []);
 
-
 const [mensajeChat,setMensajeChat]=useState("")
-
 
 const handleChangeM=(event)=>{
   setMensajeChat(event.target.value)
 }
 const enviar=()=>{
-
-  //const msgEnviar=`${nombre}: ${mensajeChat}`
+//const msgEnviar=`${nombre}: ${mensajeChat}`
 const msgEnviar={
   nombre:nombre,
   mensaje:mensajeChat
@@ -674,11 +685,11 @@ const handleKeyPress = (event) => {
       value={sock.join('\n')} className="consolaTiradas" readOnly></textarea>*/
 
 
-      useEffect(() => {
-        if (messagesEndRef.current) {
-          messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-        }
-      }, [sock]);
+useEffect(() => {
+  if (messagesEndRef.current) {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  }
+}, [sock]);
 
      
 
@@ -716,34 +727,49 @@ const handleKeyPress = (event) => {
             <input type="number" placeholder="caracteristica principal" value={principal} onChange={handlePrincipal} className="cajaTirada" style={{width:"50%"}}/>
             <input type="number" placeholder="caracteristica secundaria" value={secundaria} onChange={handleSecundaria} className="cajaTirada" style={{width:"50%"}}/>
             </div>
-           
+
+           <div style={{display:"grid", gridTemplateColumns:"1fr 1fr"}} className="botoncinios">
             <div>
-            <button className="btn btn-success" onClick={addD10}>+d10</button>
-            <button className="btn btn-danger" onClick={restD10}>-d10</button>
+            <Button variant="outline-danger" onClick={restD10}>-d10</Button>
             <label htmlFor="" value={dadosD10} className="dados10">{dadosD10}</label>
+            <Button variant="outline-success" style={{marginLeft:"0.5em"}}onClick={addD10}>+d10</Button> 
             </div>
             <div>
-            <button className="btn btn-success" onClick={addD20}>+d20</button>
-            <button className="btn btn-danger" onClick={restD20}>-d20</button>
+            <Button variant="outline-danger" onClick={restD20}>-d20</Button>
             <label htmlFor="" value={dadosD20} className="dados10">{dadosD20}</label>
+            <Button variant="outline-success" style={{marginLeft:"0.5em"}} onClick={addD20}>+d20</Button>
+            
             </div>
             <div>
-            <button className="btn btn-success" onClick={addD10Bono}>+d10</button>
-            <button className="btn btn-danger" onClick={restD10Bono}>-d10</button>
+            <Button variant="outline-danger" onClick={restD10Bono}>-d10</Button>
             <label htmlFor="" value={dadosD10Bono} className="dados10">{dadosD10Bono}</label>
+            <Button variant="outline-success"  style={{marginLeft:"0.5em"}} onClick={addD10Bono}>+d10</Button>
+          
             </div>    
 
             <div>
-            <button className="btn btn-success" onClick={addD6Bono}> +d06</button>
-            <button className="btn btn-danger" onClick={restD6Bono}> -d06</button>
+            <Button variant="outline-danger" onClick={restD6Bono}> -d06</Button>
             <label htmlFor="" value={dadosD6Bono} className="dados10">{dadosD6Bono}</label>
+            <Button variant="outline-success" style={{marginLeft:"0.5em"}} onClick={addD6Bono}> +d06</Button>
+           
             </div>    
 
             <div>
-            <button className="btn btn-success" onClick={addD4Bono}> +d04</button>
-            <button className="btn btn-danger" onClick={restD4Bono}> -d04</button>
+            <Button variant="outline-danger" onClick={restD12Bono}> -d12</Button>
+            <label htmlFor="" value={dadosD12Bono} className="dados10">{dadosD12Bono}</label>
+            <Button variant="outline-success" style={{marginLeft:"0.5em"}} onClick={addD12Bono}> +d12</Button>
+            
+            </div>     
+
+            <div>
+            <Button variant="outline-danger" onClick={restD4Bono}> -d04</Button>
             <label htmlFor="" value={dadosD4Bono} className="dados10">{dadosD4Bono}</label>
+            <Button variant="outline-success" style={{marginLeft:"0.5em"}}  onClick={addD4Bono}> +d04</Button>
+           
             </div>       
+
+           </div>
+           
         </div>
       
         <div className="cajasTirdas">
@@ -758,7 +784,10 @@ const handleKeyPress = (event) => {
         </div>
         <div>
             <input type="text" id="dadosD20" className="cajaTirada" value={valTiradaD20} placeholder="dados d20 de Bono"readOnly />
-        </div>      
+        </div>  
+        <div >
+            <input type="text" id="dadosD12Bono" className="cajaTirada" value={valTiradaD12} placeholder="dados d12 de Bono"readOnly />
+        </div>    
         <div >
             <input type="text" id="dadosD10Bono" className="cajaTirada" value={valTiradaD10Bono} placeholder="dados d10 de KEN"readOnly />
         </div>
@@ -766,8 +795,6 @@ const handleKeyPress = (event) => {
         <div>
             <input type="text" id="dadosD6Bono" className="cajaTirada" value={valTiradaD6} placeholder="dados d6 de Bono"readOnly />
         </div>
-
-
         <div>
             <input type="text" id="dadosD4Bono" className="cajaTirada" value={valTiradaD4} placeholder="dados d4 de Bono"readOnly />
         </div>
