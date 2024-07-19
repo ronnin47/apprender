@@ -11,7 +11,16 @@ export const Nava= ({tituloNav})=> {
   return (
     <Navbar expand="lg" bg="dark" variant="dark" className="mb-3">
       <Container fluid>
-        <Navbar.Brand href="#">{tituloNav}</Navbar.Brand>
+        <Navbar.Brand href="#">
+        <img
+          alt=""
+          src="/mitamaDorada.svg"
+          width="30"
+          height="30"
+          className="d-inline-block align-top"
+          style={{marginLeft:"3em"}}
+        />
+          {tituloNav}</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav

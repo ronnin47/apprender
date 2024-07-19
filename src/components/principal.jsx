@@ -159,10 +159,26 @@ export const Principal= ()=> {
 
 
 //aca trabajamos con los badge
-
+/*
 const [fuerzaBadge,setFuerzaBadge]=useState("");
 
+const subirFuerzaBadge=()=>{
+  console.log("funciona subir fuerza badge");
+  if (fuerzaBadge === "") {
+    setFuerzaBadge(1);
+  } else {
+    setFuerzaBadge(prevFuerzaBadge => Number(prevFuerzaBadge) + 1);
+  }
+}
 
+const bajarFuerzaBadge = (event) => {
+  event.stopPropagation();
+  setFuerzaBadge(prevFuerzaBadge => {
+    const newValue = prevFuerzaBadge - 1;
+    return newValue <= 0 ? "" : newValue;
+  });
+};
+*/
   return (
     <>
      <Accordion defaultActiveKey={['1']}  alwaysOpen>
@@ -426,6 +442,7 @@ const [fuerzaBadge,setFuerzaBadge]=useState("");
             historia={pj.historia}
             naturaleza={pj.naturaleza}
             eliminarPj={eliminarPj}
+
 
 
           />

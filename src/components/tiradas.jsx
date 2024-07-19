@@ -1,10 +1,11 @@
 import { useEffect, useState, useRef } from "react"
-
 import 'animate.css';
 import { io } from 'socket.io-client';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Swal from 'sweetalert2';
+
+
 
 const socket = io(process.env.REACT_APP_BACKEND_URL);
 //REACT_APP_BACKEND_URL=https://tu-backend-en-render.onrender.com
@@ -336,7 +337,7 @@ const guardarTiradaMacro=()=>{
   confirmButtonText: "Guardar",
   denyButtonText: `No guardar`
 }).then((result) => {
-  /* Read more about isConfirmed, isDenied below */
+  
   if (result.isConfirmed) {
     const tirada = {
       principal: principal || 0,
@@ -351,11 +352,8 @@ const guardarTiradaMacro=()=>{
       nombre:nombre,
     };
     
-    console.log(tirada)
-    
-    //guardamos el boton1 del nombre
     localStorage.setItem(`boton${selectedButton}_${nombre}`, JSON.stringify(tirada));
-    //TIENE QUE HACER EL SET AL BOTON SELECCIONADO
+    
     switch(selectedButton){
       case 1:
         setBoton1(tirada);
@@ -390,9 +388,6 @@ const guardarTiradaMacro=()=>{
     }
     
     
-    
-    //console.log("BOTON ESCOGIDO: "+selectedButton)
-    
     //LIMPIAR IMPUT 
     setNombreTirada("");
 
@@ -413,8 +408,6 @@ const handleInputChange = (event) => {
 
 
 const cargarTirada1=()=>{
-  console.log("funciona boton Tirada 1")
-
    const principal1=parseInt(boton1.principal) || 0;
    setPrincipal(principal1);
    const secundaria1=parseInt(boton1.secundaria) || 0;
@@ -435,9 +428,6 @@ const cargarTirada1=()=>{
 
 
 const cargarTirada2=()=>{
-  console.log("funciona boton Tirada2")
-
-  
   const principal2=boton2.principal || 0;
   setPrincipal(principal2);
   const secundaria2=boton2.secundaria  || 0;
@@ -456,9 +446,6 @@ const cargarTirada2=()=>{
   setDadosD12Bono(dadosD122); 
 }
 const cargarTirada3=()=>{
-  console.log("funciona boton Tirada 3")
-
-  
   const principal3=boton3.principal  || 0;
   setPrincipal(principal3);
   const secundaria3=boton3.secundaria  || 0;
@@ -477,8 +464,6 @@ const cargarTirada3=()=>{
   setDadosD12Bono(dadosD123);  
 }
 const cargarTirada4=()=>{
-  console.log("funciona boton Tirada 4")
-
   const principal4=boton4.principal  || 0;
   setPrincipal(principal4);
   const secundaria4=boton4.secundaria  || 0;
@@ -497,9 +482,6 @@ const cargarTirada4=()=>{
   setDadosD12Bono(dadosD124);  
 }
 const cargarTirada5=()=>{
-  console.log("funciona boton Tirada 5")
-
-  
   const principal5=boton5.principal  || 0;
   setPrincipal(principal5);
   const secundaria5=boton5.secundaria  || 0;
@@ -518,9 +500,6 @@ const cargarTirada5=()=>{
   setDadosD12Bono(dadosD125);  
 }
 const cargarTirada6=()=>{
-  console.log("funciona boton Tirada 6")
-
-  
   const principal6=boton6.principal  || 0;
   setPrincipal(principal6);
   const secundaria6=boton6.secundaria  || 0;
@@ -540,9 +519,6 @@ const cargarTirada6=()=>{
 }
 
 const cargarTirada7=()=>{
-  console.log("funciona boton Tirada 7")
-
-  
   const principal7=boton7.principal  || 0;
   setPrincipal(principal7);
   const secundaria7=boton7.secundaria  || 0;
@@ -562,9 +538,6 @@ const cargarTirada7=()=>{
 }
 
 const cargarTirada8=()=>{
-  console.log("funciona boton Tirada 8")
-
-  
   const principal8=boton8.principal  || 0;
   setPrincipal(principal8);
   const secundaria8=boton8.secundaria  || 0;
@@ -584,9 +557,6 @@ const cargarTirada8=()=>{
 }
 
 const cargarTirada9=()=>{
-  console.log("funciona boton Tirada 9")
-
-  
   const principal9=boton9.principal  || 0;
   setPrincipal(principal9);
   const secundaria9=boton9.secundaria  || 0;
@@ -606,9 +576,6 @@ const cargarTirada9=()=>{
 }
 
 const cargarTirada10=()=>{
-  console.log("funciona boton Tirada 10")
-
-  
   const principal10=boton10.principal  || 0;
   setPrincipal(principal10);
   const secundaria10=boton10.secundaria  || 0;
@@ -663,7 +630,6 @@ const msgEnviar={
 
 
 
-
 useEffect(() => {
   if (textareaRef.current) {
     textareaRef.current.scrollTop = textareaRef.current.scrollHeight;
@@ -700,7 +666,6 @@ useEffect(() => {
           {/* Verificar contenido de sock */}
           {console.log("Contenido de sock:", sock)}
           {sock.map((msg, index) => {
-            // Dividir el mensaje si es necesario
             const [msgNombre, ...msgMensajeArray] = msg.split(': ');
             const msgMensaje = msgMensajeArray.join(': ');
             return (
@@ -842,7 +807,6 @@ useEffect(() => {
             <Button variant="outline-warning" onClick={cargarTirada10}>{boton10.nombreTirada || "Accion-10"}</Button>
           </div>
     </div>
-
     
     </>
     
