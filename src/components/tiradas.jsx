@@ -161,7 +161,7 @@ const baset=principalValue+secundariaValue
   }
   
   //acaaa 8
-  const message = `           Tirada       ${imprimirBase}     ${imprimirTirada}       ${imprimirBonoD10}        ${imprimirBonoD20}        ${imprimirBonoKen}         ${imprimirBonoD6}        ${imprimirBonoD4}       ${imprimirBonoD12}       TOTAL: ${total}`;
+  const message = `     Tirada  ${nombreTirada}      ${imprimirBase}     ${imprimirTirada}       ${imprimirBonoD10}        ${imprimirBonoD20}        ${imprimirBonoKen}         ${imprimirBonoD6}        ${imprimirBonoD4}       ${imprimirBonoD12}       TOTAL: ${total}`;
   
   const msgEnviar={
     nombre:nombre,
@@ -175,6 +175,8 @@ const baset=principalValue+secundariaValue
   
   socket.emit('message', msgEnviar);
   setMessage('')
+  //Una opcion era limpiar el nombre tirada tras una tirada o activar y desactivar el boton
+  setNombreTirada("");
 
 }
 
@@ -408,6 +410,8 @@ const handleInputChange = (event) => {
 
 
 const cargarTirada1=()=>{
+  //presenta el nombre de la tirada que queria coco
+   setNombreTirada(boton1.nombreTirada || "Accion-1")
    const principal1=parseInt(boton1.principal) || 0;
    setPrincipal(principal1);
    const secundaria1=parseInt(boton1.secundaria) || 0;
@@ -428,6 +432,7 @@ const cargarTirada1=()=>{
 
 
 const cargarTirada2=()=>{
+  setNombreTirada(boton2.nombreTirada || "Accion-2")
   const principal2=boton2.principal || 0;
   setPrincipal(principal2);
   const secundaria2=boton2.secundaria  || 0;
@@ -446,6 +451,7 @@ const cargarTirada2=()=>{
   setDadosD12Bono(dadosD122); 
 }
 const cargarTirada3=()=>{
+  setNombreTirada(boton3.nombreTirada || "Accion-3")
   const principal3=boton3.principal  || 0;
   setPrincipal(principal3);
   const secundaria3=boton3.secundaria  || 0;
@@ -464,6 +470,7 @@ const cargarTirada3=()=>{
   setDadosD12Bono(dadosD123);  
 }
 const cargarTirada4=()=>{
+  setNombreTirada(boton4.nombreTirada || "Accion-4")
   const principal4=boton4.principal  || 0;
   setPrincipal(principal4);
   const secundaria4=boton4.secundaria  || 0;
@@ -482,6 +489,7 @@ const cargarTirada4=()=>{
   setDadosD12Bono(dadosD124);  
 }
 const cargarTirada5=()=>{
+  setNombreTirada(boton5.nombreTirada || "Accion-5")
   const principal5=boton5.principal  || 0;
   setPrincipal(principal5);
   const secundaria5=boton5.secundaria  || 0;
@@ -500,6 +508,7 @@ const cargarTirada5=()=>{
   setDadosD12Bono(dadosD125);  
 }
 const cargarTirada6=()=>{
+  setNombreTirada(boton6.nombreTirada || "Accion-6")
   const principal6=boton6.principal  || 0;
   setPrincipal(principal6);
   const secundaria6=boton6.secundaria  || 0;
@@ -519,6 +528,7 @@ const cargarTirada6=()=>{
 }
 
 const cargarTirada7=()=>{
+  setNombreTirada(boton5.nombreTirada || "Accion-7")
   const principal7=boton7.principal  || 0;
   setPrincipal(principal7);
   const secundaria7=boton7.secundaria  || 0;
@@ -538,6 +548,7 @@ const cargarTirada7=()=>{
 }
 
 const cargarTirada8=()=>{
+  setNombreTirada(boton8.nombreTirada|| "Accion-8")
   const principal8=boton8.principal  || 0;
   setPrincipal(principal8);
   const secundaria8=boton8.secundaria  || 0;
@@ -557,6 +568,7 @@ const cargarTirada8=()=>{
 }
 
 const cargarTirada9=()=>{
+  setNombreTirada(boton9.nombreTirada || "Accion-9")
   const principal9=boton9.principal  || 0;
   setPrincipal(principal9);
   const secundaria9=boton9.secundaria  || 0;
@@ -576,6 +588,7 @@ const cargarTirada9=()=>{
 }
 
 const cargarTirada10=()=>{
+  setNombreTirada(boton10.nombreTirada || "Accion-10")
   const principal10=boton10.principal  || 0;
   setPrincipal(principal10);
   const secundaria10=boton10.secundaria  || 0;

@@ -149,6 +149,7 @@ export const CargarPersonaje = ({
   const handleImageUpload = () => {
     inputFileRef.current.click();
   };
+  
   const handleChangeNombre = (event) => {
     setNombre(event.target.value);
   };
