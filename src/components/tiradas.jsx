@@ -411,6 +411,8 @@ const handleInputChange = (event) => {
 
 const cargarTirada1=()=>{
   //presenta el nombre de la tirada que queria coco
+  // acaaaaaaaaaaaa
+  setSelectedButton(1);
    setNombreTirada(boton1.nombreTirada || "Accion-1")
    const principal1=parseInt(boton1.principal) || 0;
    setPrincipal(principal1);
@@ -432,6 +434,7 @@ const cargarTirada1=()=>{
 
 
 const cargarTirada2=()=>{
+  setSelectedButton(2);
   setNombreTirada(boton2.nombreTirada || "Accion-2")
   const principal2=boton2.principal || 0;
   setPrincipal(principal2);
@@ -451,6 +454,7 @@ const cargarTirada2=()=>{
   setDadosD12Bono(dadosD122); 
 }
 const cargarTirada3=()=>{
+  setSelectedButton(3);
   setNombreTirada(boton3.nombreTirada || "Accion-3")
   const principal3=boton3.principal  || 0;
   setPrincipal(principal3);
@@ -470,6 +474,7 @@ const cargarTirada3=()=>{
   setDadosD12Bono(dadosD123);  
 }
 const cargarTirada4=()=>{
+  setSelectedButton(4);
   setNombreTirada(boton4.nombreTirada || "Accion-4")
   const principal4=boton4.principal  || 0;
   setPrincipal(principal4);
@@ -489,6 +494,7 @@ const cargarTirada4=()=>{
   setDadosD12Bono(dadosD124);  
 }
 const cargarTirada5=()=>{
+  setSelectedButton(5);
   setNombreTirada(boton5.nombreTirada || "Accion-5")
   const principal5=boton5.principal  || 0;
   setPrincipal(principal5);
@@ -508,6 +514,7 @@ const cargarTirada5=()=>{
   setDadosD12Bono(dadosD125);  
 }
 const cargarTirada6=()=>{
+  setSelectedButton(6);
   setNombreTirada(boton6.nombreTirada || "Accion-6")
   const principal6=boton6.principal  || 0;
   setPrincipal(principal6);
@@ -528,6 +535,7 @@ const cargarTirada6=()=>{
 }
 
 const cargarTirada7=()=>{
+  setSelectedButton(7);
   setNombreTirada(boton5.nombreTirada || "Accion-7")
   const principal7=boton7.principal  || 0;
   setPrincipal(principal7);
@@ -548,6 +556,7 @@ const cargarTirada7=()=>{
 }
 
 const cargarTirada8=()=>{
+  setSelectedButton(8);
   setNombreTirada(boton8.nombreTirada|| "Accion-8")
   const principal8=boton8.principal  || 0;
   setPrincipal(principal8);
@@ -568,6 +577,7 @@ const cargarTirada8=()=>{
 }
 
 const cargarTirada9=()=>{
+  setSelectedButton(9);
   setNombreTirada(boton9.nombreTirada || "Accion-9")
   const principal9=boton9.principal  || 0;
   setPrincipal(principal9);
@@ -588,6 +598,7 @@ const cargarTirada9=()=>{
 }
 
 const cargarTirada10=()=>{
+  setSelectedButton(10);
   setNombreTirada(boton10.nombreTirada || "Accion-10")
   const principal10=boton10.principal  || 0;
   setPrincipal(principal10);
