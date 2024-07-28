@@ -536,7 +536,7 @@ const cargarTirada6=()=>{
 
 const cargarTirada7=()=>{
   setSelectedButton(7);
-  setNombreTirada(boton5.nombreTirada || "Accion-7")
+  setNombreTirada(boton7.nombreTirada || "Accion-7")
   const principal7=boton7.principal  || 0;
   setPrincipal(principal7);
   const secundaria7=boton7.secundaria  || 0;
